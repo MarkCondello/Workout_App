@@ -1,0 +1,53 @@
+.alerts {
+    width: 100%;
+    padding: 1rem 30%;
+
+    .callout {
+        border: none;
+        position: relative;
+
+        span {
+            color: $grey;
+            font-size: 1rem;
+        }
+
+        .close-button {
+            top: 50%;
+            right: 0;
+            transform: translate(0%, -50%);
+            position: absolute;
+        }
+    }
+    &.alert {
+        background-color: $danger;
+
+        span {
+            color: $white;
+        }
+        .close-button {
+            color: $danger;
+        }
+    }
+
+    &.warning {
+        background-color: $warning;
+
+        span {
+            color:  $grey;
+        }
+        .close-button {
+            color: $warning;
+        }
+    }
+
+    &.success {
+        background-color: $success;
+
+        span {
+            color:  $white;
+        }
+        .close-button {
+            color: $success;
+        }
+    }
+}
