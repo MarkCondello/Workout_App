@@ -22,6 +22,12 @@ Route::post('/planner/{workoutId}/storeWeight', 'PlannerController@storeWeight')
 Route::post('/planner/{workoutId}/storeCardio', 'PlannerController@storeCardio')->middleware('auth');
 
 Route::post('/planner/{workoutId}/createInterval', 'PlannerController@createInterval')->middleware('auth');
+Route::get('/planner/addIntervalWeights/{intervalId}', 'PlannerController@addIntervalWeights')->middleware('auth');
+
+
+Route::post('/planner/storeIntervalWeights/{intervalId}', 'PlannerController@intervalDetails')->middleware('auth');
+
+
 
 Route::post('/planner/createWorkout', 'PlannerController@createWorkout')->middleware('auth');
 
@@ -35,8 +41,6 @@ Route::post('/planner/{workoutId}/save-workout-results', [
 Route::get('/planner', 'PlannerController@index')->name('planner')->middleware('auth');
 Route::get('/planner/{workoutId}/weight-training', 'PlannerController@addWeights')->name('weight-training')->middleware('auth');
 Route::get('/planner/{workoutId}/cardio-training', 'PlannerController@addCardio')->name('cardio-training')->middleware('auth');
-
-Route::get('/planner/{workoutId}/interval-training', 'PlannerController@addInterval')->name('interval-training')->middleware('auth');
 
 Route::get('planner/{workoutId}/delete', 'PlannerController@deleteWorkout')->middleware('auth');
 Route::get('planner/{workoutId}/show', 'PlannerController@showWorkout')->middleware('auth');

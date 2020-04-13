@@ -13,6 +13,10 @@ class IntervalGroup extends Model
 
     public function exerciseWorkouts( )
     {
-        $this->hasMany( 'App\ExerciseWorkout' );
+        return $this->hasMany( 'App\ExerciseWorkout' );
+    }
+
+    public function userWorkout(){
+        return $this->belongsTo('App\User_Workout');
     }
 }

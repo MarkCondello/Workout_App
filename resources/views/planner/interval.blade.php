@@ -43,9 +43,9 @@
     </div>
 @endsection
 
-<!-- ALl exercises plotted against a interval workout (cardio or weights) will be set to a reps range (A distance should be included in v2)
+<!-- All exercises plotted against a interval workout (cardio or weights) will be set to a reps range (A distance should be included in v2)
 The user sets an interval and this creates a container for which the user can add weights or cardio to.
-THroughout this, they can set or update their interval time and sets for these exercises.
+Throughout this update, they can set or update their interval time and sets for these exercises.
 
 interval_group
     interval_id

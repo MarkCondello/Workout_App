@@ -71,16 +71,18 @@ class PlannerController extends Controller
     }
 
     public
-    function deleteWorkout($workoutId)
-    {
+    function deleteWorkout(
+        $workoutId
+    ) {
         User_Workout::first()->where('id', '=', $workoutId)->delete();
         session()->flash('flashWarning', 'Workout was deleted.');
         return redirect('/planner');
     }
 
     public
-    function showWorkout($workoutId)
-    {
+    function showWorkout(
+        $workoutId
+    ) {
         $workoutName = User_Workout::select('name')
             ->where([
                 ['user_id', '=', auth()->user()->id],
@@ -97,8 +99,9 @@ class PlannerController extends Controller
     }
 
     public
-    function startWorkout($workoutId)
-    {
+    function startWorkout(
+        $workoutId
+    ) {
         $workoutName = User_Workout::select('name')
             ->where([
                 ['user_id', '=', auth()->user()->id],
@@ -115,8 +118,9 @@ class PlannerController extends Controller
     }
 
     public
-    function editWorkout($workoutId)
-    {
+    function editWorkout(
+        $workoutId
+    ) {
         $workoutName = User_Workout::select('name')
             ->where([
                 ['user_id', '=', auth()->user()->id],
@@ -142,32 +146,24 @@ class PlannerController extends Controller
     }
 
     public
-    function addWeights($workoutId)
-    {
-        $weights = ExerciseTypes::find(1)->exercises->map(function ($exercise) {
-            return [$exercise->id => $exercise->name];
-        });
-
-        $exercises = [];
-        foreach ($weights as $weight) {
-            $exercises += $weight;
-        }
+    function addWeights(
+        $workoutId
+    ) {
 
         $workoutName = User_Workout::find($workoutId)->get('name');
 
         return view('planner.weights')
             ->with([
-                'weights' => $exercises,
+                'weights' => $this->getWeights(),
                 'workoutId' => $workoutId,
                 'workoutName' => $workoutName
             ]);
     }
 
-
-
     public
-    function createInterval($workoutId)
-    {
+    function createInterval(
+        $workoutId
+    ) {
 
         $mins = request('mins');
         $minutes = $mins >= 10 ? $mins : '0' . $mins;
@@ -180,29 +176,95 @@ class PlannerController extends Controller
         $intervalGroup->sets = request('sets');
         $intervalGroup->save();
 
-        session()->flash('flashNotice', 'A new interval group is included in your workout.');
-        return redirect('/planner');
-    }
-
-    public
-    function storeInterval($workoutId){
-        //saves the time against the interval and sends user back to dashboard. User can plot either weights or cardio against this interval
-    }
-
-    public
-    function addInterval($workoutId)
-    {
         $workoutName = User_Workout::find($workoutId)->get('name');
-        return view('planner.interval')
+
+        session()->flash('flashNotice', 'A new interval group is included in your workout.');
+        return view('planner.intervals.index')
             ->with([
-                'workoutId' => $workoutId,
+                "intervalGroup" => $intervalGroup,
                 'workoutName' => $workoutName
             ]);
     }
 
+    //landing page for intervals created for the user to see what exercises have been added and to include more exercises
     public
-    function addCardio($workoutId)
-    {
+    function intervalDetails(
+        $intervalId
+    ) {
+        $interval = IntervalGroup::find($intervalId);
+        $workoutName = $this->getWorkoutName($interval->workout_id);
+
+        //  check the exercise type in the request and get the stored exercise data if it exists
+        if (request('exercise_type') === 'weights') {
+            $exerciseWorkout = new ExerciseWorkout();
+            $exerciseWorkout->workout_id = $interval->workout_id;
+            $exerciseWorkout->interval_group_id = $interval->id;
+
+            $exerciseWorkout->exercise_id = request('exercise');
+            $exerciseWorkout->reps = request('reps');
+            $exerciseWorkout->weight = request('weight');
+            $exerciseWorkout->time = '00:00:00';
+
+            $exerciseWorkout->save();
+
+            session()->flash('flashNotice', 'A weight exercise has been is included in your interval.');
+
+        }
+
+        $intervalExercises = $interval->exerciseWorkouts;
+
+        foreach ($intervalExercises as $key => $exercise) {
+            $intervalExercises[$key]['name'] = Exercise::find($exercise->exercise_id)->name;
+            $intervalExercises[$key]['exercise_type'] =  ExerciseTypes::find( Exercise::find($exercise->exercise_id)->exercise_type_id )->name;
+         }
+
+         return view('planner.intervals.index')->with([
+            'workoutName' => $workoutName,
+            'intervalGroup' => $interval,
+            'intervalExercises' => $intervalExercises,
+
+        ]);
+
+    }
+
+    public
+    function addIntervalWeights(
+        $intervalId
+    ) {
+
+        $weights = ExerciseTypes::find(1)->exercises->map(function ($exercise) {
+            return [$exercise->id => $exercise->name];
+        });
+
+        $exercises = [];
+        foreach ($weights as $weight) {
+            $exercises += $weight;
+        }
+
+        return view('planner.intervals.add-weights')
+            ->with([
+                'weights' => $exercises,
+                'intervalId' => $intervalId,
+            ]);
+
+
+    }
+
+//    public function storeIntervalWeights($intervalId){
+//        die("Reached store interval weights");
+//    }
+
+    public
+    function addIntervalCardio(
+        $intervalId
+    ) {
+
+    }
+
+    public
+    function addCardio(
+        $workoutId
+    ) {
         $cardio = ExerciseTypes::find(5)->exercises->map(function ($exercise) {
             return [$exercise->id => $exercise->name];
         });
@@ -221,8 +283,9 @@ class PlannerController extends Controller
     }
 
     public
-    function storeWeight($workoutId)
-    {
+    function storeWeight(
+        $workoutId
+    ) {
         request()->validate([
             'exercise' => 'required',
             'reps' => 'numeric|min:1',
@@ -241,7 +304,6 @@ class PlannerController extends Controller
             $exerciseWorkout->sets = request('sets');
 
             $exerciseWorkout->time = '00:00:00';
-
             $exerciseWorkout->save();
             --$setsCount;
         endwhile;
@@ -251,8 +313,9 @@ class PlannerController extends Controller
     }
 
     public
-    function storeCardio($workoutId)
-    {
+    function storeCardio(
+        $workoutId
+    ) {
         request()->validate([
             'exercise' => 'required',
             'sets' => 'required|min:1'
@@ -278,8 +341,9 @@ class PlannerController extends Controller
     }
 
     public
-    function updateWorkout($workoutId)
-    {
+    function updateWorkout(
+        $workoutId
+    ) {
         $exercise_workout_id_items = request()->get('exercise_workout_id');
         $exercise_type = request()->get('exercise_type');
         $exercise_reps = request()->get('reps');
@@ -319,8 +383,9 @@ class PlannerController extends Controller
     }
 
     public
-    function saveResults($workoutId)
-    {
+    function saveResults(
+        $workoutId
+    ) {
         $formIds = request('exercise_workout_id');
         $formReps = request('reps');
         $formWeights = request('weight');
@@ -343,8 +408,9 @@ class PlannerController extends Controller
     }
 
     public
-    function copyWorkout($workoutId)
-    {
+    function copyWorkout(
+        $workoutId
+    ) {
         $workoutName = $this->getWorkoutName($workoutId);
 
         return view('planner.copy')
@@ -354,10 +420,10 @@ class PlannerController extends Controller
             ]);
     }
 
-
     public
-    function saveCopiedWorkout($workoutId)
-    {
+    function saveCopiedWorkout(
+        $workoutId
+    ) {
         request()->validate([
             'workoutName' => 'required|unique:user_workouts,name'
         ]);
@@ -387,8 +453,10 @@ class PlannerController extends Controller
 
     public
     static
-    function getSavedWorkoutData($workoutId, $grouped = true)
-    {
+    function getSavedWorkoutData(
+        $workoutId,
+        $grouped = true
+    ) {
         $exercises = User_Workout::find($workoutId)->exercise_workouts;
         //add the name and result for each exercise
         foreach ($exercises as $exercise) {
@@ -403,8 +471,9 @@ class PlannerController extends Controller
     }
 
     public
-    function getWorkoutName($workoutId)
-    {
+    function getWorkoutName(
+        $workoutId
+    ) {
         $workoutName = User_Workout::select('name')
             ->where([
                 ['id', '=', $workoutId],
@@ -412,5 +481,19 @@ class PlannerController extends Controller
             ])
             ->get();
         return $workoutName;
+    }
+
+    public function getWeights()
+    {
+        $weights = ExerciseTypes::find(1)->exercises->map(function ($exercise) {
+            return [$exercise->id => $exercise->name];
+        });
+
+        $exercises = [];
+        foreach ($weights as $weight) {
+            $exercises += $weight;
+        }
+
+        return $exercises;
     }
 }

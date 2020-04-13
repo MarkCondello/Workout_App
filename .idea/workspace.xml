@@ -2,40 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/database/seeds/User_table_seeder.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/CountdownTimer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/js/components/countdown.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/sass/components/_countdown.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/exercise-groups.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/components/workout-options.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/planner/copy.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/planner/edit.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/planner/interval.blade.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/resources/views/planner/intervals/create-exercises.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/intervals/index.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Exercise.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exercise.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/ExerciseWorkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ExerciseWorkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ExerciseTypes.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ExerciseTypes.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Result.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Result.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User_Workout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User_Workout.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_14_102851_create_user__workouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_14_102851_create_user__workouts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_14_114917_create_exercise_workouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_14_114917_create_exercise_workouts_table.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_26_034707_results.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_26_034707_results.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/Exercise_Type_table_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/Exercise_Type_table_seeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/seeds/Exercises_table_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/Exercises_table_seeder.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/show.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/start.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/start.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/IntervalGroup.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/IntervalGroup.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/interval.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/interval.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/create-exercises.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/add-weights.blade.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -155,7 +128,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/seeds" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -165,13 +138,14 @@
     <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/resources/views/planner" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/database/seeds" />
       <recent name="$PROJECT_DIR$/resources/views/planner" />
       <recent name="$PROJECT_DIR$/resources/js/components" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/resources/views/planner" />
     </key>
   </component>
   <component name="RunManager">
@@ -224,6 +198,7 @@
       <workItem from="1583663389397" duration="252000" />
       <workItem from="1584577567919" duration="632000" />
       <workItem from="1585472042729" duration="6708000" />
+      <workItem from="1586762396962" duration="8772000" />
     </task>
     <servers />
   </component>
@@ -254,11 +229,12 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="318" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1582837184050" />
-    <state x="-1481" y="33" width="1043" height="1038" key="find.popup" timestamp="1584577763381">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="2359" y="10" width="1043" height="1061" key="find.popup" timestamp="1586766695122">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="329" y="31" width="782" height="861" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1582577550735" />
     <state x="-1481" y="33" width="1043" height="1038" key="find.popup/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577763381" />
+    <state x="2359" y="10" width="1043" height="1061" key="find.popup/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586766695122" />
     <state x="-1460" y="136" key="scopes" timestamp="1584577657259">
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
