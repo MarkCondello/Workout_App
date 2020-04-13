@@ -17,7 +17,7 @@ class Exercise_Type_table_seeder extends Seeder
         ]);
 
         DB::table('exercise_type')->insert([
-            'name' => 'interval',
+            'name' => 'cardio',
         ]);
 
         DB::table('exercise_type')->insert([
@@ -28,8 +28,6 @@ class Exercise_Type_table_seeder extends Seeder
             'name' => 'stretching',
         ]);
 
-        DB::table('exercise_type')->insert([
-            'name' => 'cardio',
-        ]);
+
     }
 }

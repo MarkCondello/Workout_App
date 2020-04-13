@@ -20,12 +20,13 @@ class Results extends Migration
             $table->integer('recorded_reps');
             $table->integer('recorded_weight');
             $table->time('recorded_time');
+            $table->timestamps();
+
             $table->foreign('exercise_workout_id')
                 ->references('id')
                 ->on('exercise_workouts')
                 ->onDelete('cascade');
 
-            $table->timestamps();
         });
     }
 

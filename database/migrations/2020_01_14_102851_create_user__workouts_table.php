@@ -17,6 +17,8 @@ class CreateUserWorkoutsTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('user_id');
             $table->text('name')->nullable();
+            $table->boolean('has_results')->default(false);
+
             $table->timestamps();
 
             $table->foreign('user_id')

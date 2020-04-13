@@ -49519,16 +49519,28 @@ module.exports = function(module) {
 /*!*****************************!*\
   !*** ./resources/js/app.js ***!
   \*****************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_CountdownTimer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CountdownTimer */ "./resources/js/components/CountdownTimer.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
  * building robust, powerful web applications using Vue and Laravel.
  */
-__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
+__webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //A named import will be better
+//loop through all timer items.
 
+
+
+$(document).ready(function () {
+  $('.countdown').each(function (index, $el) {
+    var countdown = new _components_CountdownTimer__WEBPACK_IMPORTED_MODULE_0__["default"]($el);
+    console.log(countdown);
+  });
+});
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /**
  * The following block of code may be used to automatically register your
@@ -49595,6 +49607,140 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 //     cluster: process.env.MIX_PUSHER_APP_CLUSTER,
 //     encrypted: true
 // });
+
+/***/ }),
+
+/***/ "./resources/js/components/CountdownTimer.js":
+/*!***************************************************!*\
+  !*** ./resources/js/components/CountdownTimer.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var _default =
+/*#__PURE__*/
+function () {
+  function _default($el) {
+    var _this = this;
+
+    _classCallCheck(this, _default);
+
+    this.$timerContainer = $el;
+    this.timePathRemaining = $(this.$timerContainer).find('.base-timer__path-remaining');
+    this.$baseTimerLabel = $(this.$timerContainer).find(".base-timer__label");
+    this.$baseTimerPathRemaining = $(this.$timerContainer).find(".base-timer__path-remaining"); // Start with an initial value of 20 seconds
+
+    this.TIME_LIMIT = $($el).data('time');
+    this.WARNING_THRESHOLD = this.TIME_LIMIT / 2;
+    this.ALERT_THRESHOLD = this.TIME_LIMIT / 4; // Initially, no time has passed, but this will count up
+    // and subtract from the TIME_LIMIT
+
+    this.timePassed = 0;
+    this.timeLeft = this.TIME_LIMIT;
+    this.timerInterval = null;
+    this.FULL_DASH_ARRAY = 283;
+    this.COLOR_CODES = {
+      info: {
+        color: "green"
+      },
+      warning: {
+        color: "orange",
+        threshold: this.WARNING_THRESHOLD
+      },
+      alert: {
+        color: "red",
+        threshold: this.ALERT_THRESHOLD
+      }
+    };
+    this.remainingPathColor = this.COLOR_CODES.info.color;
+    $(this.timePathRemaining).addClass(this.COLOR_CODES.info.color);
+    $(this.$baseTimerLabel).html('Start...');
+    $(this.$timerContainer).on('click', function () {
+      _this.startTimer();
+
+      $(_this.$timerContainer).off('click');
+    });
+  } // Divides time left by the defined time limit.
+
+
+  _createClass(_default, [{
+    key: "calculateTimeFraction",
+    value: function calculateTimeFraction() {
+      return (this.timeLeft - 1) / this.TIME_LIMIT;
+    }
+  }, {
+    key: "formatTimeLeft",
+    value: function formatTimeLeft(time) {
+      // The largest round integer less than or equal to the result of time divided being by 60.
+      var minutes = Math.floor(time / 60); // Seconds are the remainder of the time divided by 60 (modulus operator)
+
+      var seconds = time % 60; // If the value of seconds is less than 10, then display seconds with a leading zero
+
+      if (seconds < 10) {
+        seconds = "0".concat(seconds);
+      } // The output in MM:SS format
+
+
+      return "".concat(minutes, ":").concat(seconds);
+    } // Update the dasharray value as time passes, starting with 283
+
+  }, {
+    key: "setCircleDasharray",
+    value: function setCircleDasharray() {
+      var circleDasharray = "".concat((this.calculateTimeFraction() * this.FULL_DASH_ARRAY).toFixed(0), " ").concat(this.FULL_DASH_ARRAY);
+      $(this.$baseTimerPathRemaining).attr("stroke-dasharray", circleDasharray);
+    }
+  }, {
+    key: "startTimer",
+    value: function startTimer() {
+      var _this2 = this;
+
+      this.timerInterval = setInterval(function () {
+        // The amount of time passed increments by one
+        _this2.timePassed = _this2.timePassed += 1;
+        _this2.timeLeft = _this2.TIME_LIMIT - _this2.timePassed;
+
+        _this2.setCircleDasharray();
+
+        _this2.setRemainingPathColor(_this2.timeLeft);
+
+        $(_this2.$baseTimerLabel).html(_this2.formatTimeLeft(_this2.timeLeft));
+
+        if (_this2.timeLeft === 0) {
+          clearInterval(_this2.timerInterval);
+          $(_this2.$baseTimerLabel).html('End!');
+        }
+      }, 1000);
+    }
+  }, {
+    key: "setRemainingPathColor",
+    value: function setRemainingPathColor(timeLeft) {
+      var _this$COLOR_CODES = this.COLOR_CODES,
+          alert = _this$COLOR_CODES.alert,
+          warning = _this$COLOR_CODES.warning,
+          info = _this$COLOR_CODES.info; // If the remaining time is less than or equal to a quarter of total, remove the "warning" class and apply the "alert" class.
+
+      if (timeLeft <= alert.threshold) {
+        $(this.timePathRemaining).removeClass(warning.color).addClass(alert.color); // If the remaining time is less than or equal to half of total , remove the base color and apply the "warning" class.
+      } else if (timeLeft <= warning.threshold) {
+        $(this.timePathRemaining).removeClass(info.color).addClass(warning.color);
+      }
+    }
+  }]);
+
+  return _default;
+}();
+
+
 
 /***/ }),
 

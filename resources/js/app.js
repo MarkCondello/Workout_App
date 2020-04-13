@@ -6,6 +6,19 @@
 
 require('./bootstrap');
 
+//A named import will be better
+//loop through all timer items.
+import CountdownTimer from './components/CountdownTimer';
+
+$(document).ready(()=>{
+    $('.countdown').each((index, $el)=>{
+        let countdown = new CountdownTimer($el);
+        console.log(countdown);
+    });
+});
+
+
+
 window.Vue = require('vue');
 
 /**

@@ -1,7 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="" />
+    <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/database/seeds/User_table_seeder.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/CountdownTimer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/js/components/countdown.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/sass/components/_countdown.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/components/exercise-groups.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/components/workout-options.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/copy.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/edit.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/interval.blade.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/resources/views/planner/intervals/create-exercises.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Exercise.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Exercise.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/ExerciseWorkout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/ExerciseWorkout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Result.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Result.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User_Workout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User_Workout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_14_102851_create_user__workouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_14_102851_create_user__workouts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_14_114917_create_exercise_workouts_table.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_14_114917_create_exercise_workouts_table.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/migrations/2020_01_26_034707_results.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/migrations/2020_01_26_034707_results.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/Exercise_Type_table_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/Exercise_Type_table_seeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/Exercises_table_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/Exercises_table_seeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/sass/app.scss" beforeDir="false" afterPath="$PROJECT_DIR$/resources/sass/app.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/show.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/show.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/start.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/start.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +48,9 @@
     <execution>
       <executable />
     </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="PhpWorkspaceProjectConfiguration">
     <include_path>
@@ -114,8 +153,9 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/database/seeds" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -127,6 +167,11 @@
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/resources/views/planner" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/database/seeds" />
+      <recent name="$PROJECT_DIR$/resources/views/planner" />
+      <recent name="$PROJECT_DIR$/resources/js/components" />
     </key>
   </component>
   <component name="RunManager">
@@ -163,7 +208,22 @@
       <workItem from="1579516148165" duration="909000" />
       <workItem from="1580009955834" duration="18944000" />
       <workItem from="1580626277350" duration="243000" />
-      <workItem from="1581584079456" duration="3948000" />
+      <workItem from="1581584079456" duration="4150000" />
+      <workItem from="1581660835647" duration="1957000" />
+      <workItem from="1581817586486" duration="2636000" />
+      <workItem from="1581972057138" duration="4139000" />
+      <workItem from="1582358308465" duration="8996000" />
+      <workItem from="1582436333875" duration="238000" />
+      <workItem from="1582451184526" duration="5908000" />
+      <workItem from="1582490526425" duration="44157000" />
+      <workItem from="1583113459285" duration="246000" />
+      <workItem from="1583131787283" duration="623000" />
+      <workItem from="1583142072680" duration="3810000" />
+      <workItem from="1583182090986" duration="7000" />
+      <workItem from="1583183185867" duration="19182000" />
+      <workItem from="1583663389397" duration="252000" />
+      <workItem from="1584577567919" duration="632000" />
+      <workItem from="1585472042729" duration="6708000" />
     </task>
     <servers />
   </component>
@@ -171,14 +231,43 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="559" y="374" key="com.intellij.ide.util.TipDialog" timestamp="1580626277982">
+    <state x="199" y="23" key="CommitChangelistDialog2" timestamp="1586761572431">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="199" y="23" key="CommitChangelistDialog2/0.23.1440.877@0.23.1440.877" timestamp="1586761572431" />
+    <state x="100" y="123" width="1240" height="677" key="DiffContextDialog" timestamp="1586761564658">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1586761564658" />
+    <state x="596" y="189" key="RollbackChangesDialog" timestamp="1582458094943">
       <screen x="0" y="23" width="1680" height="1027" />
     </state>
-    <state x="-1281" y="384" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1579507011439" />
+    <state x="596" y="189" key="RollbackChangesDialog/0.23.1680.1027/-1920.23.1920.1057@0.23.1680.1027" timestamp="1582458094943" />
+    <state x="479" y="323" key="com.intellij.ide.util.TipDialog" timestamp="1586761378163">
+      <screen x="0" y="23" width="1440" height="877" />
+    </state>
+    <state x="559" y="359" key="com.intellij.ide.util.TipDialog/0.0.1680.1050/-1920.0.1920.1080@0.0.1680.1050" timestamp="1581817587167" />
+    <state x="479" y="323" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1586761378163" />
+    <state x="-1281" y="384" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1583663394601" />
     <state x="559" y="374" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/-1920.23.1920.1057@0.23.1680.1027" timestamp="1580626277982" />
-    <state x="505" y="250" width="670" height="676" key="search.everywhere.popup" timestamp="1580013289783">
-      <screen x="0" y="23" width="1680" height="1027" />
+    <state x="318" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582837184050">
+      <screen x="0" y="23" width="1440" height="877" />
     </state>
+    <state x="318" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1582837184050" />
+    <state x="-1481" y="33" width="1043" height="1038" key="find.popup" timestamp="1584577763381">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state x="329" y="31" width="782" height="861" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1582577550735" />
+    <state x="-1481" y="33" width="1043" height="1038" key="find.popup/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577763381" />
+    <state x="-1460" y="136" key="scopes" timestamp="1584577657259">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state x="-1460" y="136" key="scopes/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577657259" />
+    <state x="-1343" y="257" width="1118" height="697" key="search.everywhere.popup" timestamp="1584577591035">
+      <screen x="-1920" y="23" width="1920" height="1057" />
+    </state>
+    <state x="433" y="217" width="838" height="578" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1583303784789" />
+    <state x="-1343" y="257" width="1118" height="697" key="search.everywhere.popup/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577591035" />
     <state x="505" y="250" width="670" height="676" key="search.everywhere.popup/0.23.1680.1027/-1920.23.1920.1057@0.23.1680.1027" timestamp="1580013289783" />
   </component>
 </project>

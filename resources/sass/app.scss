@@ -8,7 +8,9 @@
 @import '~bootstrap/scss/bootstrap';
 
 //components
-@import 'components/alerts';
+@import 'components/alerts',
+'components/countdown';
+
 html, body {
     background-color: #fff;
     color: #636b6f;

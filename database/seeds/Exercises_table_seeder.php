@@ -35,5 +35,29 @@ class Exercise_table_seeder extends Seeder
             'equipment' => 'Bar Rack, Bar bell, Weight Plates.',
             'muscle_group' => 'Quads, Glutes, Lower back, Hamstrings.',
         ]);
+
+        DB::table('exercises')->insert([
+            'name' => 'Skipping',
+            'exercise_type_id' => 2,
+            'instructions' => 'Skip.',
+            'equipment' => 'Skipping rope.',
+            'muscle_group' => 'All body.',
+        ]);
+
+        DB::table('exercises')->insert([
+            'name' => 'Kickboxing',
+            'exercise_type_id' => 2,
+            'instructions' => 'Hit boxing bags, or a sparing partner.',
+            'equipment' => 'Gloves, wraps.',
+            'muscle_group' => 'All body.',
+        ]);
+
+        DB::table('exercises')->insert([
+            'name' => 'Jumping Jacks',
+            'exercise_type_id' => 2,
+            'instructions' => 'Do star jumps',
+            'equipment' => 'Nothing.',
+            'muscle_group' => 'All body.',
+        ]);
     }
 }
