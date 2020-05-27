@@ -17,6 +17,11 @@ class ExerciseWorkout extends Model
         return $this->belongsTo('App\Exercise', 'exercise_id');
     }
 
+    //only for interval exercises // needs to be refactored, split out on its own model etc
+    public function intervalGroup(){
+        return $this->belongsTo('App\IntervalGroup', 'interval_group_id');
+    }
+
     public function result(){
         return $this->hasOne('App\Result');
      }

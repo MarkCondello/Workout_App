@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ExerciseTypes extends Model
 {
-    //
+
     protected $table = 'exercise_type';
 
     public function exercises(){

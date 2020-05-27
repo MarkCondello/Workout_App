@@ -6,7 +6,7 @@
                 <div class="card">
                     <div class="card-header">{{  $workoutName[0]->name  }} | Add Interval </div>
                     <div class="card-body">
-                        {!! Form::open(['action' => ['PlannerController@createInterval', $workoutId], 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => ['interval.create', $workoutId], 'method' => 'POST']) !!}
 
                         <div class="form-group">
                             <div>

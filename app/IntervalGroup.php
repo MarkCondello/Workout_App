@@ -10,7 +10,6 @@ class IntervalGroup extends Model
     protected $fillable = ['time', 'sets'];
     public $timestamps = false;
 
-
     public function exerciseWorkouts( )
     {
         return $this->hasMany( 'App\ExerciseWorkout' );

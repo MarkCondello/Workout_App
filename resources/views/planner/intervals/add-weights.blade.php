@@ -4,16 +4,15 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header"> | Add Weights to Interval</div>
+                    <div class="card-header">WO ID: {{$workoutId}} | Add Weights to Interval</div>
                     <div class="card-body">
 
-                         {!! Form::open(['action' => ['PlannerController@intervalDetails', $intervalId], 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => ['interval.saveweights', $intervalId, $workoutId], 'method' => 'POST']) !!}
 
                         {{Form::hidden('exercise_type', 'weights')}}
 
                         <div class="form-group">
                             {{Form::label('exercise', 'Select Exercise')}}
-
                             {{Form::select('exercise', $weights, null, ['placeholder' => '...'])}}
                             @error('exercise')
                             <p class="help is-danger">{{$errors->first('exercise')}}</p>

@@ -6,7 +6,8 @@
                 <div class="card mb-5">
                     <div class="card-header d-flex justify-content-between">
                         <h2> {{$workoutName[0]->name}}</h2>
-                        <a href="/planner/{{$workoutId}}/edit-workout" class="btn btn-warning">Edit workout</a>
+                        {{--  ToDo: Add edit options for workout--}}
+{{--                        <a href="/planner/{{$workoutId}}/edit-workout" class="btn btn-warning disabled">Edit workout</a>--}}
                         <a href="/planner/{{$workoutId}}/start-workout" class="btn btn-success">Start workout</a>
                     </div>
                     <div class="card-body">
@@ -16,11 +17,24 @@
                             </div>
                         @endif
 
-                        @forelse($exercisesGrouped as $exerciseGroup)
-                            @include('components/exercise-groups', ['exerciseGroup' => $exerciseGroup])
-                        @empty
+                        @if(!empty($exercisesGrouped) || !empty($intervalsGrouped))
+                            @if($exercisesGrouped)
+                                <div class="card-body border border-secondary mt-4 mb-4">
+                                    <h4>Weights and Cardio</h4>
+                                    <hr>
+                                    @include('components/exercise-groups', ['exercisesGrouped' => $exercisesGrouped])
+                                </div>
+                            @endif
+                            @if($intervalsGrouped)
+                                <div class="card-body border border-secondary mt-4 mb-4">
+                                    <h4>Intervals</h4>
+                                    <hr>
+                                    @include('components/intervals-grouped', ['intervalsGrouped' => $intervalsGrouped])
+                                </div>
+                            @endif
+                        @else
                             <p>You have no exercises. Go back to add exercises...</p>
-                        @endforelse
+                        @endif
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">

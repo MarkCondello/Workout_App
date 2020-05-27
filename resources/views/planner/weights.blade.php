@@ -6,7 +6,8 @@
                 <div class="card">
                     <div class="card-header">{{  $workoutName[0]->name  }} | Add Weights</div>
                      <div class="card-body">
-                        {!! Form::open(['action' => ['PlannerController@storeWeight', $workoutId], 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => ['weights.store', $workoutId], 'method' => 'POST']) !!}
+
                          <div class="form-group">
                             {{Form::label('exercise', 'Select Exercise')}}
 
@@ -18,7 +19,7 @@
 
                         <div class="form-group">
                             {{Form::label('weight', 'Weight')}}
-                            {{Form::number('weight', 0, ['min' => '1'])}}
+                            {{Form::number('weight', 0, ['min' => '5', 'step' => '5'])}}
                             @error('weight')
                             <p class="help is-danger">{{$errors->first('weight')}}</p>
                             @enderror
