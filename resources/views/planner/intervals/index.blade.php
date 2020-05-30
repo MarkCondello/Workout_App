@@ -5,6 +5,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
+{{--                         @dd($intervalExercises)--}}
                         {!!  $workoutName[0]->name  !!} Interval |
                         <a href="{{ route('interval.addweights', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add Weights</a> |
                          <a href="{{ route('interval.addcardio', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add Cardio</a>

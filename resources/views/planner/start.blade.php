@@ -26,8 +26,8 @@
                                 @foreach($intervalsGrouped as $index => $group)
                                     <div class="d-flex justify-content-between">
                                         <h3>{{$group['time']}} | Sets: {{$group['sets']}} | id: {{$group['id']}}</h3>
-                                        {{Form::label('interval[' .  $index . '][' . $group['id'] . ']', 'Competed interval') }}
-                                        {{Form::checkbox('interval[' .  $index . '][' . $group['id'] . ']' )}}
+                                        {{Form::label('interval_sets[' . $group['id'] . ']', 'Interval sets completed') }}
+                                        {{Form::number('interval_sets[' . $group['id'] . ']', 0, ['min' => 0, 'max' => $group['sets']] )}}
                                     </div>
                                     <div>
                                         @php $timeArr = explode(":", $group['time']);

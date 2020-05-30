@@ -13,7 +13,6 @@ use App\Http\Controllers\Controller;
 class IntervalController extends Controller
 {
     //
-
     public function intervals($workoutId)
     {
         return view('planner.intervals.interval')->with([
@@ -37,28 +36,42 @@ class IntervalController extends Controller
         $intervalGroup->sets = request('sets');
         $intervalGroup->save();
 
+        return redirect()
+            ->route('interval.show', [
+                'workoutId' => $workoutId,
+                "intervalGroup" => $intervalGroup,
+            ])->with('status', 'An interval group is included in your workout.');
+    }
+
+    public function show($workoutId, $intervalGroup)
+    {
         $workoutName = User_Workout::find($workoutId)->get('name');
 
-        session()->flash('flashNotice', 'A new interval group is included in your workout.');
+        $intervalExercises = IntervalGroup::find($intervalGroup)->exerciseWorkouts;
+
+        foreach ($intervalExercises as $key => $exercise) {
+            $intervalExercises[$key]['name'] = Exercise::find($exercise->exercise_id)->name;
+            $intervalExercises[$key]['exercise_type'] = ExerciseTypes::find(Exercise::find($exercise->exercise_id)->exercise_type_id)->name;
+        }
+
+        $intervalGroup = IntervalGroup::find($intervalGroup);
         return view('planner.intervals.index')
             ->with([
                 'workoutId' => $workoutId,
                 "intervalGroup" => $intervalGroup,
-                'workoutName' => $workoutName
+                "workoutName" => $workoutName,
+                'intervalExercises' => $intervalExercises,
+
             ]);
     }
 
-    //method created for the user to see what exercises have been added and to include more exercises
     public
     function intervalDetails(
         $workoutId,
         $intervalId
     ) {
 
-      // die(  $intervalId);
         $interval = IntervalGroup::find($intervalId);
-        $workoutName = $this->getWorkoutName($interval->workout_id);
-
         //  check the exercise type in the request and get the stored exercise data if it exists
         if (request('exercise_type') === 'weights') {
             $exerciseWorkout = new ExerciseWorkout();
@@ -71,36 +84,30 @@ class IntervalController extends Controller
             $exerciseWorkout->time = '00:00:00';
             $exerciseWorkout->save();
 
-            session()->flash('flashNotice', 'A weight exercise has been is included in your interval.');
+            return redirect()
+                ->route('interval.show', [
+                    'workoutId' => $workoutId,
+                    "intervalGroup" => $interval,
+                ])->with('status', 'A weight exercise has been is included in your interval.');
         }
 
         if (request('exercise_type') === 'cardio') {
             $exerciseWorkout = new ExerciseWorkout();
             $exerciseWorkout->workout_id = $interval->workout_id;
             $exerciseWorkout->interval_group_id = $interval->id;
-
             $exerciseWorkout->exercise_id = request('exercise');
             $exerciseWorkout->reps = request('reps');
             $exerciseWorkout->distance = request('distance');
             $exerciseWorkout->time = '00:00:00';
             $exerciseWorkout->save();
 
-            session()->flash('flashNotice', 'A cardio exercise has been is included in your interval.');
+            return redirect()
+                ->route('interval.show', [
+                    'workoutId' => $workoutId,
+                    "intervalGroup" => $interval,
+                ])->with('status', 'A cardio exercise has been is included in your interval.');
         }
 
-        $intervalExercises = $interval->exerciseWorkouts;
-
-        foreach ($intervalExercises as $key => $exercise) {
-            $intervalExercises[$key]['name'] = Exercise::find($exercise->exercise_id)->name;
-            $intervalExercises[$key]['exercise_type'] = ExerciseTypes::find(Exercise::find($exercise->exercise_id)->exercise_type_id)->name;
-        }
-
-        return view('planner.intervals.index')->with([
-            'workoutId' => $workoutId,
-            'workoutName' => $workoutName,
-            'intervalGroup' => $interval,
-            'intervalExercises' => $intervalExercises,
-        ]);
     }
 
     public

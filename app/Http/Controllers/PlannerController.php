@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\IntervalResults;
 use Illuminate\Http\Request;
 
 use App\Exercise;
@@ -32,10 +33,10 @@ class PlannerController extends Controller
             ->where('has_results', '=', false)
             ->get();
 
-//        $user_results = DB::table('user_workouts')
-//            ->where('user_id', '=', auth()->user()->id)
-//            ->where('has_results', '=', true)
-//            ->get();
+        $user_results = DB::table('user_workouts')
+            ->where('user_id', '=', auth()->user()->id)
+            ->where('has_results', '=', true)
+            ->get();
 
         function sortWorkouts($user_data)
         {
@@ -46,11 +47,11 @@ class PlannerController extends Controller
             });
         }
 
-//        $results = sortWorkouts($user_results);
+        $results = sortWorkouts($user_results);
         $workouts = sortWorkouts($user_workouts);
 
         return view('planner.index')->with([
-//            'results' => $results,
+            'results' => $results,
             'workouts' => $workouts
         ]);
     }
@@ -195,8 +196,16 @@ class PlannerController extends Controller
     function saveResults(
         $workoutId
     ) {
-        //ToDO: Create another column in results called interval_sets
-        //ToDO: Update start view to include another foreach for intervals only and update this method to recieve interval_sets reached
+
+        $intervalSets = request('interval_sets');
+        if (!is_null($intervalSets)):
+            foreach ($intervalSets as $key => $val):
+                $intervalResult = new IntervalResults();
+                $intervalResult->interval_group_id = $key;
+                $intervalResult->sets_completed = $val;
+                $intervalResult->save();
+            endforeach;
+        endif;
 
         $exerciseTypes = request('exercise_type');
         $formIds = request('exercise_workout_id');
@@ -204,27 +213,29 @@ class PlannerController extends Controller
         $formWeights = request('weight');
         $formTimes = request('time');
 
-        foreach ($exerciseTypes as $index => $typeGroup):
-            foreach ($typeGroup as $key => $type):
-                $result = new Result();
-                $result->exercise_workout_id = $formIds[$index][$key];
+        if (!is_null($exerciseTypes)):
+            foreach ($exerciseTypes as $index => $typeGroup):
+                foreach ($typeGroup as $key => $type):
+                    $result = new Result();
+                    $result->exercise_workout_id = $formIds[$index][$key];
 
-                switch ($type):
-                    case 'cardio' :
-                        $result->recorded_time = $formTimes[$index][$key];
-                        $result->recorded_reps = 0;
-                        $result->recorded_weight = 0;
-                        break;
-                    case 'weight' :
-                        $result->recorded_time = '00:00:00';
-                        $result->recorded_reps = $formReps[$index][$key];
-                        $result->recorded_weight = $formWeights[$index][$key];
-                        break;
-                endswitch;
+                    switch ($type):
+                        case 'cardio' :
+                            $result->recorded_time = $formTimes[$index][$key];
+                            $result->recorded_reps = 0;
+                            $result->recorded_weight = 0;
+                            break;
+                        case 'weight' :
+                            $result->recorded_time = '00:00:00';
+                            $result->recorded_reps = $formReps[$index][$key];
+                            $result->recorded_weight = $formWeights[$index][$key];
+                            break;
+                    endswitch;
 
-                $result->save();
+                    $result->save();
+                endforeach;
             endforeach;
-        endforeach;
+        endif;
 
         DB::table('user_workouts')
             ->where('id', '=', $workoutId)
@@ -309,6 +320,8 @@ class PlannerController extends Controller
                     ->groupBy('exercise_id')
                     ->toArray();
 
+                $intervalGroups[$key]['interval_results'] = IntervalGroup::find($group['id'])->intervalResults;
+
                 foreach ($intervalGroups[$key]['exercises_grouped'] as $i => $exercisesGroup):
                     foreach ($exercisesGroup as $j => $exercises):
                         $intervalGroups[$key]['exercises_grouped'][$i][$j]['name'] = Exercise::find($exercises['exercise_id'])->name;
@@ -337,8 +350,4 @@ class PlannerController extends Controller
 
 }
 
-
-// ToDo: Create and interval_workouts table (Intervals never have sets or time and exercises never have interval group id's)
-// ToDO intervalResults table, with model and eloquent relations,
-// ToDO: Modify getSavedWorkoutData so it only gets exercises data (excludes interval data),
-// //TODO: create another method getSavedIntervalData
+ // //TODO: create another method getSavedIntervalData
