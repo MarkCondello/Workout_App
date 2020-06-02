@@ -82,7 +82,7 @@
                                                     {{Form::hidden('exercise_type[' .  $index . '][' . $key . ']', $exercise['type'])}}
 
                                                     @switch($exerciseGroup[0]['type'])
-                                                        @case('weight')
+                                                         @case('weight')
                                                         <div class="d-flex justify-content-between">
                                                             <div>
                                                                 {{Form::label('reps[' .  $index . '][' . $key . ']', 'Reps target: ' . $exercise['reps']) }}
@@ -95,10 +95,11 @@
                                                         </div>
                                                         @break
                                                         @case('cardio')
-                                                        {{--                                    ToDo: Need a way to allow user to have an option if they completed it or not--}}
+                                                        {{--  ToDo: Need a way to allow user to have an option if they completed it or not--}}
                                                         @php $timeArr = explode(":", $exercise['time']);
                                                 $timeInSeconds = $timeArr[1] * 60 + $timeArr[2];
-                                                        @endphp
+                                                         @endphp
+
                                                         <div class="d-flex justify-content-between">
                                                             <div class="countdown" data-time="{{$timeInSeconds}}">
                                                                 <svg class="base-timer__svg" viewBox="0 0 100 100">

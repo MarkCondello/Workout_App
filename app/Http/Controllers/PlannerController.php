@@ -272,17 +272,47 @@ class PlannerController extends Controller
         $workout->save();
 
         $copiedWorkoutExercises = User_Workout::find($workoutId)->exercise_workouts;
-        // dd($copiedWorkoutExercises);
+        $copiedIntervalGroups = User_Workout::find($workoutId)->interval_groups;
 
-        // build up new exercises which reference the new workoutid
+        //get intervalGroups and save each items data to a new entity
+        $copiedIntervalExercises = [];
+        foreach ($copiedIntervalGroups as $key => $copiedIntervalGroup):
+            $groupId = $copiedIntervalGroup->id;
+            $intervalGroup = new IntervalGroup();
+            $intervalGroup->workout_id = $workout->id;
+            $intervalGroup->time = $copiedIntervalGroup->time;
+            $intervalGroup->sets = $copiedIntervalGroup->sets;
+            $intervalGroup->save();
+
+
+            $copiedIntervalExercises = IntervalGroup::find($groupId)->exerciseWorkouts;
+            //get the exercises in the Interval Groups and save those against the IntervalGroup Id ->exerciseWorkouts;
+            foreach ($copiedIntervalExercises as $copiedIntervalExercise):
+                $exerciseWorkout = new ExerciseWorkout();
+                $exerciseWorkout->workout_id = $workout->id;
+
+                $exerciseWorkout->exercise_id = $copiedIntervalExercise['exercise_id'];
+                $exerciseWorkout->interval_group_id = $intervalGroup->id;
+                $exerciseWorkout->reps = $copiedIntervalExercise['reps'];
+                $exerciseWorkout->weight = $copiedIntervalExercise['weight'];
+                $exerciseWorkout->sets = $copiedIntervalExercise['sets'];
+                $exerciseWorkout->time = $copiedIntervalExercise['time'];
+                $exerciseWorkout->distance = $copiedIntervalExercise['distance'];
+                $exerciseWorkout->save();
+            endforeach;
+        endforeach;
+
+        // build up new exercises which reference the new workout id
         foreach ($copiedWorkoutExercises as $exercise):
-            $exerciseWorkout = new ExerciseWorkout();
-            $exerciseWorkout->workout_id = $workout->id;
-            $exerciseWorkout->exercise_id = $exercise['exercise_id'];
-            $exerciseWorkout->reps = $exercise['reps'];
-            $exerciseWorkout->weight = $exercise['weight'];
-            $exerciseWorkout->sets = $exercise['sets'];
-            $exerciseWorkout->save();
+            if (is_null($exercise->interval_group_id)):
+                $exerciseWorkout = new ExerciseWorkout();
+                $exerciseWorkout->workout_id = $workout->id;
+                $exerciseWorkout->exercise_id = $exercise['exercise_id'];
+                $exerciseWorkout->reps = $exercise['reps'];
+                $exerciseWorkout->weight = $exercise['weight'];
+                $exerciseWorkout->sets = $exercise['sets'];
+                $exerciseWorkout->save();
+            endif;
         endforeach;
 
         session()->flash('flashNotice', 'Workout' . $workout->name . 'has been created.');
@@ -350,4 +380,4 @@ class PlannerController extends Controller
 
 }
 
- // //TODO: create another method getSavedIntervalData
+// //TODO: create another method getSavedIntervalData
