@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class User_Workout extends Model
 {
     //
-    protected $fillable = ['title', ];
+    protected $fillable = ['name', 'user_id'];
     protected $table = 'user_workouts';
 
     public function user(){
