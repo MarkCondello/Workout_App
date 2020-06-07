@@ -37,31 +37,30 @@ class IntervalController extends Controller
         $intervalGroup->save();
 
         return redirect()
-            ->route('interval.show', [
+            ->route('interval-show', [
                 'workoutId' => $workoutId,
-                "intervalGroup" => $intervalGroup,
+                "intervalId" => $intervalGroup->id,
             ])->with('status', 'An interval group is included in your workout.');
     }
 
-    public function show($workoutId, $intervalGroup)
+    public function show($workoutId, $intervalId)
     {
         $workoutName = User_Workout::find($workoutId)->get('name');
-
-        $intervalExercises = IntervalGroup::find($intervalGroup)->exerciseWorkouts;
+        $intervalExercises = IntervalGroup::find($intervalId)->exerciseWorkouts;
 
         foreach ($intervalExercises as $key => $exercise) {
             $intervalExercises[$key]['name'] = Exercise::find($exercise->exercise_id)->name;
             $intervalExercises[$key]['exercise_type'] = ExerciseTypes::find(Exercise::find($exercise->exercise_id)->exercise_type_id)->name;
         }
 
-        $intervalGroup = IntervalGroup::find($intervalGroup);
+        $intervalGroup = IntervalGroup::find($intervalId);
         return view('planner.intervals.index')
             ->with([
                 'workoutId' => $workoutId,
                 "intervalGroup" => $intervalGroup,
+                "intervalId" => $intervalGroup->id,
                 "workoutName" => $workoutName,
                 'intervalExercises' => $intervalExercises,
-
             ]);
     }
 
@@ -70,13 +69,14 @@ class IntervalController extends Controller
         $workoutId,
         $intervalId
     ) {
+//dd("Reached int details");
+        $intervalGroup = IntervalGroup::find($intervalId);
 
-        $interval = IntervalGroup::find($intervalId);
         //  check the exercise type in the request and get the stored exercise data if it exists
         if (request('exercise_type') === 'weights') {
             $exerciseWorkout = new ExerciseWorkout();
-            $exerciseWorkout->workout_id = $interval->workout_id;
-            $exerciseWorkout->interval_group_id = $interval->id;
+            $exerciseWorkout->workout_id = $intervalGroup->workout_id;
+            $exerciseWorkout->interval_group_id = $intervalGroup->id;
 
             $exerciseWorkout->exercise_id = request('exercise');
             $exerciseWorkout->reps = request('reps');
@@ -85,16 +85,16 @@ class IntervalController extends Controller
             $exerciseWorkout->save();
 
             return redirect()
-                ->route('interval.show', [
+                ->route('interval-show', [
                     'workoutId' => $workoutId,
-                    "intervalGroup" => $interval,
+                    "intervalId" => $intervalGroup->id,
                 ])->with('status', 'A weight exercise has been is included in your interval.');
         }
 
         if (request('exercise_type') === 'cardio') {
             $exerciseWorkout = new ExerciseWorkout();
-            $exerciseWorkout->workout_id = $interval->workout_id;
-            $exerciseWorkout->interval_group_id = $interval->id;
+            $exerciseWorkout->workout_id = $intervalGroup->workout_id;
+            $exerciseWorkout->interval_group_id = $intervalGroup->id;
             $exerciseWorkout->exercise_id = request('exercise');
             $exerciseWorkout->reps = request('reps');
             $exerciseWorkout->distance = request('distance');
@@ -102,12 +102,11 @@ class IntervalController extends Controller
             $exerciseWorkout->save();
 
             return redirect()
-                ->route('interval.show', [
+                ->route('interval-show', [
                     'workoutId' => $workoutId,
-                    "intervalGroup" => $interval,
+                     "intervalId" => $intervalGroup->id,
                 ])->with('status', 'A cardio exercise has been is included in your interval.');
         }
-
     }
 
     public
@@ -125,6 +124,7 @@ class IntervalController extends Controller
             $exercises += $weight;
         }
 
+
         return view('planner.intervals.add-weights')
             ->with([
                 'workoutId' => $workoutId,
@@ -132,6 +132,7 @@ class IntervalController extends Controller
                 'intervalId' => $intervalId,
             ]);
     }
+
 
     public
     function addCardio(

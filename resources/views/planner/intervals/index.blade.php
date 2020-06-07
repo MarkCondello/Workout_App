@@ -1,14 +1,23 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{--                    @dump($workoutId, $intervalId)--}}
+                {{ Breadcrumbs::render('interval-details', $workoutId, $intervalId) }}
+            </div>
+        </div>
         <div class="row justify-content-center">
+
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-{{--                         @dd($intervalExercises)--}}
-                        {!!  $workoutName[0]->name  !!} Interval |
-                        <a href="{{ route('interval.addweights', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add Weights</a> |
-                         <a href="{{ route('interval.addcardio', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add Cardio</a>
+                        {{--                         @dd($intervalExercises)--}}
+                        {!!  $workoutName[0]->name !!} Interval |
+                        <a href="{{ route('interval-weights', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add
+                            Weights</a> |
+                        <a href="{{ route('interval-cardio', ['workoutId' => $workoutId, 'intervalId' => $intervalGroup->id]) }}">Add
+                            Cardio</a>
                     </div>
 
                     <div class="card-body">
@@ -23,7 +32,7 @@
                                     @if($exercise->exercise_type === 'cardio')
                                         <li>  {{$exercise->name}} | reps: {{$exercise->reps }}
                                             @if($exercise->distance)
-                                            | distance: {{ $exercise->distance }}
+                                                | distance: {{ $exercise->distance }}
                                             @endif
                                         </li>
                                     @endif

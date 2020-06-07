@@ -2,9 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/routes/breadcrumbs.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workoutapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workoutapp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/PlannerController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/User_Workout.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User_Workout.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/add-cardio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/add-cardio.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/add-weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/add-weights.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -111,6 +123,7 @@
       <path value="$PROJECT_DIR$/vendor/laravelcollective/html" />
       <path value="$PROJECT_DIR$/vendor/maximebf/debugbar" />
       <path value="$PROJECT_DIR$/vendor/barryvdh/laravel-debugbar" />
+      <path value="$PROJECT_DIR$/vendor/davejamesmiller/laravel-breadcrumbs" />
     </include_path>
   </component>
   <component name="ProjectId" id="1WHIyWGVgFjVcWL6KVf634iIxl6" />
@@ -122,7 +135,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../defex" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dynamictradesolutions" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -210,6 +223,7 @@
       <workItem from="1591441416107" duration="2950000" />
       <workItem from="1591510725608" duration="706000" />
       <workItem from="1591516848343" duration="16000" />
+      <workItem from="1591520369221" duration="6079000" />
     </task>
     <servers />
   </component>
@@ -229,16 +243,15 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1586761564658" />
-    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1590964135645">
+    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1591525606743">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1590964135645" />
+    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1591525606743" />
     <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588026498193" />
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1586816608382" />
     <state x="2601" y="175" width="518" height="633" key="RollbackChangesDialog" timestamp="1587988655125">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="596" y="189" key="RollbackChangesDialog/0.23.1680.1027/-1920.23.1920.1057@0.23.1680.1027" timestamp="1582458094943" />
     <state x="2601" y="175" width="518" height="633" key="RollbackChangesDialog/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1587988655125" />
     <state x="2120" y="100" width="1720" height="882" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1587988852260">
       <screen x="1920" y="0" width="1920" height="1080" />
@@ -250,14 +263,9 @@
     <state x="479" y="323" key="com.intellij.ide.util.TipDialog/0.23.1440.877@0.23.1440.877" timestamp="1586761378163" />
     <state x="-1281" y="384" key="com.intellij.ide.util.TipDialog/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1583663394601" />
     <state x="683" y="387" key="com.intellij.ide.util.TipDialog/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1586816577093" />
-    <state x="318" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1582837184050">
-      <screen x="0" y="23" width="1440" height="877" />
-    </state>
-    <state x="318" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1440.877@0.23.1440.877" timestamp="1582837184050" />
     <state x="491" y="37" width="1007" height="1035" key="find.popup" timestamp="1586778760500">
       <screen x="67" y="27" width="1853" height="1053" />
     </state>
-    <state x="329" y="31" width="782" height="861" key="find.popup/0.23.1440.877@0.23.1440.877" timestamp="1582577550735" />
     <state x="-1481" y="33" width="1043" height="1038" key="find.popup/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577763381" />
     <state x="2359" y="10" width="1043" height="1061" key="find.popup/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1586766695122" />
     <state x="491" y="37" width="1007" height="1035" key="find.popup/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1586778760500" />

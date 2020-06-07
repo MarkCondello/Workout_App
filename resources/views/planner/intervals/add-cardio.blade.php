@@ -1,12 +1,17 @@
 @extends('layouts.app')
 @section('content')
     <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                {{ Breadcrumbs::render('interval-cardio', $workoutId, $intervalId) }}
+            </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">WO ID: {{$workoutId}} | Add Cardio to Interval</div>
                     <div class="card-body">
-                        {!! Form::open(['route' => ['interval.savecardio',  $intervalId, $workoutId], 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => ['interval.savecardio', $intervalId, $workoutId], 'method' => 'POST']) !!}
                         <div class="form-group">
                             {{Form::hidden('exercise_type', 'cardio')}}
 

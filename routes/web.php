@@ -38,21 +38,21 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group([
         'namespace' => 'Interval',
     ], function () {
+        Route::get('/planner/{workoutId}/interval-training', 'IntervalController@intervals')->name('interval-training');
 
-        Route::get('/planner/{workoutId}/interval-training', 'IntervalController@intervals');
         Route::post('/planner/{workoutId}/create-interval',
             ['uses' => 'IntervalController@create', 'as' => 'interval.create']);
 
-        Route::get('/planner/{workoutId}/show-interval/{intervalGroup}',
-            ['uses' => 'IntervalController@show', 'as' => 'interval.show']);
+        Route::get('/planner/{workoutId}/show-interval/{intervalId}', 'IntervalController@show' )->name('interval-show');
 
         Route::get('/planner/{workoutId}/interval-training/{intervalId}/add-weights',
-            ['uses' => 'IntervalController@addWeights', 'as' => 'interval.addweights']);
+            'IntervalController@addWeights')->name('interval-weights');
+
         Route::post('/planner/{workoutId}/interval-training/{intervalId}/save-weights',
             ['uses' => 'IntervalController@intervalDetails', 'as' => 'interval.saveweights']);
 //
-        Route::get('/planner/{workoutId}/interval-training/{intervalId}/add-cardio',
-            ['uses' => 'IntervalController@addCardio', 'as' => 'interval.addcardio']);
+        Route::get('/planner/{workoutId}/interval-training/{intervalId}/add-cardio', 'IntervalController@addCardio')->name('interval-cardio');
+
 
         Route::post('/planner/{workoutId}/interval-training/{intervalId}/save-cardio',
             ['uses' => 'IntervalController@intervalDetails', 'as' => 'interval.savecardio']);
