@@ -2,21 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/routes/breadcrumbs.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workoutapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workoutapp.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.json" beforeDir="false" afterPath="$PROJECT_DIR$/composer.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/composer.lock" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/cardio.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/index.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/add-cardio.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/add-cardio.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/add-weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/add-weights.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/index.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/index.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/weights.blade.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -135,7 +125,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../dynamictradesolutions" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -223,7 +213,10 @@
       <workItem from="1591441416107" duration="2950000" />
       <workItem from="1591510725608" duration="706000" />
       <workItem from="1591516848343" duration="16000" />
-      <workItem from="1591520369221" duration="6079000" />
+      <workItem from="1591520369221" duration="6226000" />
+      <workItem from="1591527480939" duration="2008000" />
+      <workItem from="1591588997795" duration="620000" />
+      <workItem from="1591601408512" duration="1309000" />
     </task>
     <servers />
   </component>

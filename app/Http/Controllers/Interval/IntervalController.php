@@ -124,7 +124,6 @@ class IntervalController extends Controller
             $exercises += $weight;
         }
 
-
         return view('planner.intervals.add-weights')
             ->with([
                 'workoutId' => $workoutId,
