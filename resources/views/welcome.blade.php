@@ -13,13 +13,20 @@
 </head>
 <body>
 <div  >
-    @if (Route::has('login'))
+
+    @can('access_admin')
+    <div class="top-left links " style="z-index: 2;">
+        <a href="/admin">Edit WO app</a>
+    </div>
+    @endcan
+
+    @if(Route::has('login'))
         <div class="top-right links " style="z-index: 2;">
             @auth
-                <a href="{{ url('/home') }}">Home</a>
+                <a href="{{ url('/planner') }}">Planner</a>
             @else
                 <a href="{{ route('login') }}">Login</a>
-                @if (Route::has('register'))
+                @if(Route::has('register'))
                     <a href="{{ route('register') }}">Register</a>
                 @endif
             @endauth

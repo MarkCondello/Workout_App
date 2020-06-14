@@ -19,5 +19,14 @@ class User_table_seeder extends Seeder
             'remember_token' => Str::random(10),
             'password' => Hash::make('password'),
         ]);
+
+        DB::table('users')->insert([
+            'name' => 'Mark Condello',
+            'email' => 'condellomark@gmail.com',
+            'email_verified_at' => now(),
+            'remember_token' => Str::random(10),
+            'password' => Hash::make('password'),
+        ]);
+
     }
 }

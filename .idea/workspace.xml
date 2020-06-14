@@ -3,10 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="a44eb897-1bab-4b84-a252-ea0caa2858a1" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/Interval/IntervalController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Providers/AuthServiceProvider.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/auth.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/auth.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/planner/intervals/interval.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/User.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/User.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/DatabaseSeeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database/seeds/User_table_seeder.php" beforeDir="false" afterPath="$PROJECT_DIR$/database/seeds/User_table_seeder.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/web.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/web.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -125,7 +127,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../laravelfs" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -216,7 +218,12 @@
       <workItem from="1591520369221" duration="6226000" />
       <workItem from="1591527480939" duration="2008000" />
       <workItem from="1591588997795" duration="620000" />
-      <workItem from="1591601408512" duration="1309000" />
+      <workItem from="1591601408512" duration="6619000" />
+      <workItem from="1591655455633" duration="13000" />
+      <workItem from="1591784545475" duration="5636000" />
+      <workItem from="1591828422815" duration="6000" />
+      <workItem from="1591950480317" duration="5773000" />
+      <workItem from="1592045841886" duration="57000" />
     </task>
     <servers />
   </component>
@@ -236,10 +243,10 @@
       <screen x="0" y="23" width="1440" height="877" />
     </state>
     <state x="100" y="123" width="1240" height="677" key="DiffContextDialog/0.23.1440.877@0.23.1440.877" timestamp="1586761564658" />
-    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1591525606743">
+    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl" timestamp="1592045897256">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1591525606743" />
+    <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1592045897256" />
     <state x="2655" y="290" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1588026498193" />
     <state x="776" y="310" width="424" height="484" key="FileChooserDialogImpl/67.27.1853.1053/1920.0.1920.1080@67.27.1853.1053" timestamp="1586816608382" />
     <state x="2601" y="175" width="518" height="633" key="RollbackChangesDialog" timestamp="1587988655125">
@@ -266,10 +273,10 @@
       <screen x="-1920" y="23" width="1920" height="1057" />
     </state>
     <state x="-1460" y="136" key="scopes/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577657259" />
-    <state x="-1343" y="257" width="1118" height="697" key="search.everywhere.popup" timestamp="1584577591035">
-      <screen x="-1920" y="23" width="1920" height="1057" />
+    <state x="2497" y="239" width="1118" height="713" key="search.everywhere.popup" timestamp="1591785560112">
+      <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="433" y="217" width="838" height="578" key="search.everywhere.popup/0.23.1440.877@0.23.1440.877" timestamp="1583303784789" />
     <state x="-1343" y="257" width="1118" height="697" key="search.everywhere.popup/0.23.1680.1027/-1920.23.1920.1057@-1920.23.1920.1057" timestamp="1584577591035" />
+    <state x="2497" y="239" width="1118" height="713" key="search.everywhere.popup/1920.0.1920.1080/67.27.1853.1053@1920.0.1920.1080" timestamp="1591785560112" />
   </component>
 </project>
