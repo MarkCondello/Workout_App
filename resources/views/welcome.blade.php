@@ -112,12 +112,8 @@
                 <p><a class="btn btn-secondary" href="#" role="button">View details »</a></p>
             </div><!-- /.col-lg-4 -->
         </div><!-- /.row -->
-
-
         <!-- START THE FEATURETTES -->
-
         <hr class="featurette-divider">
-
         <div class="row featurette">
             <div class="col-md-7">
                 <h2 class="featurette-heading">First featurette heading. <span
