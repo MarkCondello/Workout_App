@@ -5,7 +5,6 @@
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-header">Create a new workout</div>
-
                     <div class="card-body">
                         @if(session('status'))
                             <div class="alert alert-success" role="alert">

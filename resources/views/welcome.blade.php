@@ -29,7 +29,7 @@
             <div class="content">
                 <div class="title m-b-md">
                     @auth
-                    Hello {{auth()->user()->name }}
+                    Hello {{ auth()->user()->name }}
                         @else
                         Laravel WOA
                     @endauth
