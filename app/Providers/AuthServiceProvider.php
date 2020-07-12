@@ -25,8 +25,15 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-    //hard coded my admin user check to my email id???
-        //Gate::define('is-admin', function(User $user){ return User->is(??); })
-        //Gate::define('is-admin', function(User $user, Model??){ return true; })
+
+        //hard coded my admin user check to my email id???
+        //runs before any auth
+        Gate::before( function($user, $ability){
+            //user is authenticate at this stage
+            //check the user ability and return result of true or false
+            if ($user->abilities()->contains($ability)) {
+                return true;
+            }
+        });
     }
 }

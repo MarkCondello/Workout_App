@@ -18,6 +18,23 @@ Route::get('/', function () {
 //for logout route
 Auth::routes();
 
+//Route::get('/admin', function () {
+//    return "Admin";
+//})->middleware('can:access_admin');
+
+Route::group(
+    [
+        'middleware' => ['auth' ],
+        'can' => 'access_admin'
+    ],
+    function() {
+        Route::get('/admin', function () {
+            return "Admin";
+        });
+    }
+);
+
+
 Route::group(['middleware' => 'auth'], function () {
 
     Route::group([
