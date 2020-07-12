@@ -12,27 +12,22 @@
 
 </head>
 <body>
-<div  >
-
-    @can('access_admin')
-    <div class="top-left links " style="z-index: 2;">
-        <a href="/admin">Edit WO app</a>
-    </div>
-    @endcan
-
+<div>
     @if(Route::has('login'))
         <div class="top-right links " style="z-index: 2;">
+            @can('access_admin')
+                 <a href="{{route('admin.dash')}}">Edit WO app</a>
+             @endcan
             @auth
                 <a href="{{ url('/planner') }}">Planner</a>
             @else
-                <a href="{{ route('login') }}">Login</a>
+            <a href="{{ route('login') }}">Login</a>
                 @if(Route::has('register'))
-                    <a href="{{ route('register') }}">Register</a>
+                <a href="{{ route('register') }}">Register</a>
                 @endif
             @endauth
         </div>
     @endif
-
         <div id="carouselExampleCaptions" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
                 <li data-target="#carouselExampleCaptions" data-slide-to="0" class="active"></li>
@@ -179,9 +174,7 @@
         </div>
 
         <hr class="featurette-divider">
-
         <!-- /END THE FEATURETTES -->
-
     </div>
         <footer class="container">
             <p class="float-right"><a href="#">Back to top</a></p>
