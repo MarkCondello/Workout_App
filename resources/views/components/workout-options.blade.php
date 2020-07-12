@@ -5,7 +5,7 @@
         <a href="/planner/{{ $workout->id }}/cardio-training" class="btn btn-primary">Add
             Cardio</a>
         <a href="/planner/{{ $workout->id }}/interval-training" class="btn btn-primary">Add
-            Interval</a>
+            Intervals</a>
     </div>
     <div>
         <a href="/planner/{{ $workout->id }}/delete"

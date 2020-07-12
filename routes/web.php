@@ -15,46 +15,73 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+//for logout route
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('auth');
-Route::post('/planner/{workoutId}/storeWeight', 'PlannerController@storeWeight')->middleware('auth');
-Route::post('/planner/{workoutId}/storeCardio', 'PlannerController@storeCardio')->middleware('auth');
+Route::group(['middleware' => 'auth'], function () {
 
-Route::post('/planner/{workoutId}/createInterval', 'PlannerController@createInterval')->middleware('auth');
+    Route::group([
+        'namespace' => 'Weights',
+    ], function () {
+        Route::post('/planner/{workoutId}/store-weight',
+            ['uses' => 'WeightsController@store', 'as' => 'weights.store']);
+        Route::get('/planner/{workoutId}/weight-training', 'WeightsController@addWeights')->name('weight-training');
+    });
 
-Route::post('/planner/createWorkout', 'PlannerController@createWorkout')->middleware('auth');
+    Route::group([
+        'namespace' => 'Cardio'
+    ], function () {
+        Route::post('/planner/{workoutId}/store-cardio', ['uses' => 'CardioController@store', 'as' => 'cardio.store']);
+        Route::get('/planner/{workoutId}/cardio-training', 'CardioController@addCardio')->name('cardio-training');
+    });
 
-//a named route was required to send form data
-Route::post('/planner/{workoutId}/save-workout-results', [
-        'as' => 'planner.save-workout-results',
-        'uses' => 'PlannerController@saveResults'
-    ]
-)->middleware('auth');
+    Route::group([
+        'namespace' => 'Interval',
+    ], function () {
+        Route::get('/planner/{workoutId}/interval-training', 'IntervalController@intervals')->name('interval-training');
 
-Route::get('/planner', 'PlannerController@index')->name('planner')->middleware('auth');
-Route::get('/planner/{workoutId}/weight-training', 'PlannerController@addWeights')->name('weight-training')->middleware('auth');
-Route::get('/planner/{workoutId}/cardio-training', 'PlannerController@addCardio')->name('cardio-training')->middleware('auth');
+        Route::post('/planner/{workoutId}/create-interval',
+            ['uses' => 'IntervalController@create', 'as' => 'interval.create']);
 
-Route::get('/planner/{workoutId}/interval-training', 'PlannerController@addInterval')->name('interval-training')->middleware('auth');
+        Route::get('/planner/{workoutId}/show-interval/{intervalId}', 'IntervalController@show' )->name('interval-show');
 
-Route::get('planner/{workoutId}/delete', 'PlannerController@deleteWorkout')->middleware('auth');
-Route::get('planner/{workoutId}/show', 'PlannerController@showWorkout')->middleware('auth');
-Route::get('/planner/{workoutId}/start-workout', 'PlannerController@startWorkout')->middleware('auth');
-Route::get('/planner/{workoutId}/edit-workout', 'PlannerController@editWorkout')->middleware('auth');
-Route::get('/planner/{workoutId}/copy-workout', 'PlannerController@copyWorkout')->middleware('auth');
+        Route::get('/planner/{workoutId}/interval-training/{intervalId}/add-weights',
+            'IntervalController@addWeights')->name('interval-weights');
 
-//a named route was required to send form data
-Route::post('/planner/{workoutId}/update-workout', [
-        'as' => 'planner.update-workout',
-        'uses' => 'PlannerController@updateWorkout'
-    ]
-)->middleware('auth');
+        Route::post('/planner/{workoutId}/interval-training/{intervalId}/save-weights',
+            ['uses' => 'IntervalController@intervalDetails', 'as' => 'interval.saveweights']);
+//
+        Route::get('/planner/{workoutId}/interval-training/{intervalId}/add-cardio', 'IntervalController@addCardio')->name('interval-cardio');
 
-//a named route was required to send form data
-Route::post('/planner/{workoutId}/save-copied-workout', [
-        'as' => 'planner.save-copied-workout',
-        'uses' => 'PlannerController@saveCopiedWorkout'
-    ]
-)->middleware('auth');
 
+        Route::post('/planner/{workoutId}/interval-training/{intervalId}/save-cardio',
+            ['uses' => 'IntervalController@intervalDetails', 'as' => 'interval.savecardio']);
+
+//        Route::post('/planner/storeIntervalWeights/{intervalId}', 'IntervalController@intervalDetails');
+
+        Route::post('/planner/delete-interval/{intervalId}',
+            ['uses' => 'IntervalController@delete', 'as' => 'interval.delete']);
+
+    });
+
+
+    Route::get('/planner', 'PlannerController@index')->name('planner');
+    Route::post('/planner/createWorkout', 'PlannerController@createWorkout');
+
+    Route::get('planner/{workoutId}/delete', 'PlannerController@deleteWorkout');
+
+    Route::get('planner/{workoutId}/show', 'PlannerController@showWorkout');
+    Route::get('/planner/{workoutId}/start-workout', 'PlannerController@startWorkout');
+    Route::post('/planner/{workoutId}/save-workout-results',
+        ['as' => 'planner.save-workout-results', 'uses' => 'PlannerController@saveResults']);
+
+    Route::get('/planner/{workoutId}/copy-workout', 'PlannerController@copyWorkout');
+    Route::post('/planner/{workoutId}/save-copied-workout',
+        ['as' => 'planner.save-copied-workout', 'uses' => 'PlannerController@saveCopiedWorkout']);
+
+    Route::get('/planner/{workoutId}/edit-workout', 'PlannerController@editWorkout');
+    Route::post('/planner/{workoutId}/update-workout',
+        ['as' => 'planner.update-workout', 'uses' => 'PlannerController@updateWorkout']);
+
+
+});

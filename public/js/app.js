@@ -49525,6 +49525,7 @@ module.exports = function(module) {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_CountdownTimer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./components/CountdownTimer */ "./resources/js/components/CountdownTimer.js");
+/* harmony import */ var _components_DetailsDd__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./components/DetailsDd */ "./resources/js/components/DetailsDd.js");
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -49535,10 +49536,15 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js"); //A named
 
 
 
-$(document).ready(function () {
+
+$(function () {
+  $(".carousel").carousel();
   $('.countdown').each(function (index, $el) {
     var countdown = new _components_CountdownTimer__WEBPACK_IMPORTED_MODULE_0__["default"]($el);
     console.log(countdown);
+  });
+  $('.details-dd-btn').each(function ($index, $el) {
+    var detailsDd = new _components_DetailsDd__WEBPACK_IMPORTED_MODULE_1__["default"]($el);
   });
 });
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
@@ -49744,6 +49750,61 @@ function () {
 
 /***/ }),
 
+/***/ "./resources/js/components/DetailsDd.js":
+/*!**********************************************!*\
+  !*** ./resources/js/components/DetailsDd.js ***!
+  \**********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return _default; });
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+var _default =
+/*#__PURE__*/
+function () {
+  function _default($el) {
+    var _this = this;
+
+    _classCallCheck(this, _default);
+
+    this.ddBtn = $el;
+    this.isOpen = false;
+    this.ddPanel = $(this.ddBtn).closest('.card-header').next('.details-panel')[0];
+    $(this.ddPanel).slideUp();
+    $(this.ddBtn).on('click', function () {
+      _this.handleClick();
+    });
+    console.log(this);
+  }
+
+  _createClass(_default, [{
+    key: "handleClick",
+    value: function handleClick() {
+      $(this.ddPanel).slideToggle(); // if (this.isOpen) {
+      //     $(this.ddPanel).slideUp();
+      //     this.isOpen = false;
+      //     return;
+      // }
+      // console.log("After isOpen bool")
+      // $(this.ddPanel).slideDown();
+      // this.isOpen = true;
+    }
+  }]);
+
+  return _default;
+}();
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/ExampleComponent.vue":
 /*!******************************************************!*\
   !*** ./resources/js/components/ExampleComponent.vue ***!
@@ -49831,8 +49892,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/vagrant/code/workoutapp/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/vagrant/code/workoutapp/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/dcodegroup/Mark/sandbox/Workout_App/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/dcodegroup/Mark/sandbox/Workout_App/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

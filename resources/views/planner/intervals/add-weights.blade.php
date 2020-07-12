@@ -3,19 +3,21 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {{ Breadcrumbs::render('weights', $workoutId) }}
+                {{ Breadcrumbs::render('interval-weights', $workoutId, $intervalId) }}
             </div>
         </div>
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">{{  $workoutName[0]->name  }} | Add Weights</div>
-                     <div class="card-body">
-                        {!! Form::open(['route' => ['weights.store', $workoutId], 'method' => 'POST']) !!}
+                    <div class="card-header">WO ID: {{$workoutId}} | Add Weights to Interval</div>
+                    <div class="card-body">
 
-                         <div class="form-group">
+                        {!! Form::open(['route' => ['interval.saveweights', $intervalId, $workoutId], 'method' => 'POST']) !!}
+
+                        {{Form::hidden('exercise_type', 'weights')}}
+
+                        <div class="form-group">
                             {{Form::label('exercise', 'Select Exercise')}}
-
                             {{Form::select('exercise', $weights, null, ['placeholder' => '...'])}}
                             @error('exercise')
                             <p class="help is-danger">{{$errors->first('exercise')}}</p>
@@ -24,7 +26,7 @@
 
                         <div class="form-group">
                             {{Form::label('weight', 'Weight')}}
-                            {{Form::number('weight', 0, ['min' => '5', 'step' => '5'])}}
+                            {{Form::number('weight', 0, ['min' => '1'])}}
                             @error('weight')
                             <p class="help is-danger">{{$errors->first('weight')}}</p>
                             @enderror
@@ -39,24 +41,13 @@
                         </div>
 
                         <div class="form-group">
-                            {{Form::label('sets', 'Add Sets')}}
-                            {{Form::number('sets', 0, ['min' => '1'])}}
-                            @error('sets')
-                            <p class="help is-danger">{{$errors->first('sets')}}</p>
-                            @enderror
-                        </div>
-
-                        <div class="form-group">
                             {{Form::submit('Add Exercises', ['class' =>'btn btn-success'])}}
                         </div>
 
-                    {!! Form::close() !!}
-                    </div>
-                    <div class="card-footer">
-                        <a href="/planner" class="btn btn-primary">Back to planner</a>
+                        {!! Form::close() !!}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    @endsection
+@endsection
