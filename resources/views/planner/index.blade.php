@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                {{ Breadcrumbs::render('planner') }}
+                {{ Breadcrumbs::render('planner') }}  
             </div>
         </div>
         <div class="row justify-content-center">
@@ -16,7 +16,7 @@
                                 {{ session('status') }}
                             </div>
                         @endif
-                        {!! Form::open(['action' => 'PlannerController@createWorkout', 'method' => 'POST']) !!}
+                        {!! Form::open(['route' => 'workout.create', 'method' => 'POST']) !!}
                         <div class="form-group">
                             {{Form::label('name', 'Workout name.')}}
                             {{Form::text('name', '', ['class'=> 'form-control'])}}

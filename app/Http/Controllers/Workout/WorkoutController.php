@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Workout;
 
 use App\IntervalResults;
 use Illuminate\Http\Request;
-
+use App\Http\Controllers\Controller;
 use App\Exercise;
 use App\ExerciseTypes;
 use App\User_Workout;
 use App\ExerciseWorkout;
 use App\Result;
 use App\IntervalGroup;
+use App\Services\PlannerService;
 use DB;
 
-class PlannerController extends Controller
+//ToDo: Controller should just navigate trafic to views, db logic and processing should be added to model and service layers respectivley
+class WorkoutController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -28,42 +30,29 @@ class PlannerController extends Controller
      */
     public function index()
     {
-        $user_workouts = DB::table('user_workouts')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('has_results', '=', false)
-            ->get();
+        $results = PlannerService::sortWorkouts( 
+            auth()->user()->workouts->where('has_results', false) 
+        );
+        $workouts = PlannerService::sortWorkouts( 
+            auth()->user()->workouts->where('has_results', true)
+        );
 
-        $user_results = DB::table('user_workouts')
-            ->where('user_id', '=', auth()->user()->id)
-            ->where('has_results', '=', true)
-            ->get();
-
-        function sortWorkouts($user_data)
-        {
-            return $user_data->sortByDesc(function ($workout) {
-                $workout->exercisesGrouped = PlannerController::getSavedWorkoutData($workout->id);
-                $workout->intervalsGrouped = PlannerController::getSavedWorkoutData($workout->id, true);
-                return $workout->created_at;
-            });
-        }
-
-        $results = sortWorkouts($user_results);
-        $workouts = sortWorkouts($user_workouts);
-
-        return view('planner.index')->with([
-            'results' => $results,
-            'workouts' => $workouts
-        ]);
+        return view('planner.index')
+        ->with(compact(
+            'results' ,
+            'workouts'  
+        ));
     }
 
     public
     function createWorkout()
     {
+        //use a request class instead
         request()->validate([
             'name' => 'required|unique:user_workouts,name'
         ]);
 
-         User_Workout::create([
+        User_Workout::create([
             'name' => request()->get('name'),
             'user_id' => auth()->user()->id
         ]);
@@ -85,6 +74,7 @@ class PlannerController extends Controller
     function showWorkout(
         $workoutId
     ) {
+        //refine this, pretty sure I dont need the where clause
         $workoutName = User_Workout::select('name')
             ->where([
                 ['user_id', '=', auth()->user()->id],
@@ -324,53 +314,6 @@ class PlannerController extends Controller
 
         session()->flash('flashNotice', 'Workout' . $workout->name . 'has been created.');
         return $this->showWorkout($workout->id);
-    }
-
-
-    //ToDO: this should be added to a service layer and split into intervals and exercises.
-    public
-    static
-    function getSavedWorkoutData(
-        $workoutId,
-        $getIntervals = false,
-        $grouped = true
-    ) {
-
-        if (!$getIntervals) {
-            $exercises = User_Workout::find($workoutId)->exercise_workouts
-                ->where('interval_group_id', '==', null);
-
-            foreach ($exercises as $exercise) :
-                $exercise['name'] = Exercise::find($exercise->exercise_id)->name;
-                $exercise['type'] = Exercise::find($exercise->exercise_id)->exerciseType->name;
-                $exercise['result'] = ExerciseWorkout::find($exercise->id)->result;
-            endforeach;
-            if ($grouped):
-                $exercises = $exercises->groupBy('exercise_id')->toArray();
-            endif;
-
-            return $exercises;
-        }
-
-        if ($getIntervals) {
-            $intervalGroups = User_Workout::find($workoutId)->interval_groups->toArray();
-            foreach ($intervalGroups as $key => $group):
-                $intervalGroups[$key]['exercises_grouped'] = IntervalGroup::find($group['id'])->exerciseWorkouts
-                    ->groupBy('exercise_id')
-                    ->toArray();
-
-                $intervalGroups[$key]['interval_results'] = IntervalGroup::find($group['id'])->intervalResults;
-
-                foreach ($intervalGroups[$key]['exercises_grouped'] as $i => $exercisesGroup):
-                    foreach ($exercisesGroup as $j => $exercises):
-                        $intervalGroups[$key]['exercises_grouped'][$i][$j]['name'] = Exercise::find($exercises['exercise_id'])->name;
-                        $intervalGroups[$key]['exercises_grouped'][$i][$j]['type'] = Exercise::find($exercises['exercise_id'])->exerciseType->name;
-                    endforeach;
-                endforeach;
-            endforeach;
-
-            return $intervalGroups;
-        }
     }
 
     public

@@ -21,4 +21,14 @@ class User_Workout extends Model
     public function interval_groups(){
         return $this->hasMany('App\IntervalGroup', 'workout_id');
     }
+
+    public function hasResults()
+    {
+        return $this->has_results;
+    }
+
+    public function hasNoResults()
+    {
+        return $this->has_results === false;
+    }
 }

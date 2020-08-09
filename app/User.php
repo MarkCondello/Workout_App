@@ -37,8 +37,9 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function workouts() {
-       return $this->hasMany('App\User_Workout');
+    public function workouts() 
+    {
+       return $this->hasMany(User_Workout::class);
     }
 
     public function roles(){

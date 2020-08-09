@@ -2,7 +2,7 @@
 
 //planner
 Breadcrumbs::for('planner', function($trail) {
-    $trail->push('Planner', route('planner'));
+    $trail->push('Planner', route('workout.planner'));
 });
 
 //planner / weights
