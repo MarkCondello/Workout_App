@@ -13,6 +13,7 @@ use App\Result;
 use App\IntervalGroup;
 use App\Services\PlannerService;
 use DB;
+use App\Http\Requests\CreateWorkoutRequest;
 
 //ToDo: Controller should just navigate trafic to views, db logic and processing should be added to model and service layers respectivley
 class WorkoutController extends Controller
@@ -31,10 +32,10 @@ class WorkoutController extends Controller
     public function index()
     {
         $results = PlannerService::sortWorkouts( 
-            auth()->user()->workouts->where('has_results', false) 
+            auth()->user()->workouts->where('has_results', true) 
         );
         $workouts = PlannerService::sortWorkouts( 
-            auth()->user()->workouts->where('has_results', true)
+            auth()->user()->workouts->where('has_results', false)
         );
 
         return view('planner.index')
@@ -45,13 +46,8 @@ class WorkoutController extends Controller
     }
 
     public
-    function createWorkout()
+    function create( CreateWorkoutRequest $request )
     {
-        //use a request class instead
-        request()->validate([
-            'name' => 'required|unique:user_workouts,name'
-        ]);
-
         User_Workout::create([
             'name' => request()->get('name'),
             'user_id' => auth()->user()->id
@@ -62,55 +58,27 @@ class WorkoutController extends Controller
     }
 
     public
-    function deleteWorkout(
-        $workoutId
-    ) {
-        User_Workout::first()->where('id', '=', $workoutId)->delete();
+    function destroy(User_Workout $workout) {
+        // Could not run the following : Cannot delete or update a parent row
+        // $workout->interval_groups()->delete();
+        // $workout->delete();
+        User_Workout::first()->where('id', '=', $workout->id)->delete();
         session()->flash('flashWarning', 'Workout was deleted.');
         return redirect('/planner');
     }
 
     public
-    function showWorkout(
-        $workoutId
-    ) {
-        //refine this, pretty sure I dont need the where clause
-        $workoutName = User_Workout::select('name')
-            ->where([
-                ['user_id', '=', auth()->user()->id],
-                ['id', '=', $workoutId]
-            ])
-            ->get();
-
-        return view('planner.show')->with([
-            'exercisesGrouped' => $this->getSavedWorkoutData($workoutId),
-            'intervalsGrouped' => $this->getSavedWorkoutData($workoutId, true),
-            'workoutName' => $workoutName,
-            'workoutId' => $workoutId
-        ]);
+    function show(User_Workout $workout) 
+    {
+        return view('planner.show')
+        ->with( PlannerService::showStartWorkoutData($workout) );
     }
-
-    //This is almost the same as show except for the view and method name
-    //there has to be a way to make it DRYer
-    //ToDO: Add this as a method with params for the view
+    
+ 
     public
-    function startWorkout(
-        $workoutId
-    ) {
-        //ToDo: use getWorkout name method
-        $workoutName = User_Workout::select('name')
-            ->where([
-                ['user_id', '=', auth()->user()->id],
-                ['id', '=', $workoutId]
-            ])
-            ->get();
-
-        return view('planner.start')->with([
-            'exercisesGrouped' => $this->getSavedWorkoutData($workoutId),
-            'intervalsGrouped' => $this->getSavedWorkoutData($workoutId, true),
-            'workoutName' => $workoutName,
-            'workoutId' => $workoutId
-        ]);
+    function start(User_Workout $workout) {
+        return view('planner.start')
+        ->with( PlannerService::showStartWorkoutData($workout) );
     }
 
     public
@@ -187,11 +155,8 @@ class WorkoutController extends Controller
         return $this->showWorkout($workoutId);
     }
 
-    public
-    function saveResults(
-        $workoutId
-    ) {
-
+    public function save ($workoutId) 
+    {
         $intervalSets = request('interval_sets');
         if (!is_null($intervalSets)):
             foreach ($intervalSets as $key => $val):

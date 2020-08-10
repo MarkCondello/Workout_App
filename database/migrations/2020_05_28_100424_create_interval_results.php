@@ -21,7 +21,8 @@ class CreateIntervalResults extends Migration
 
             $table->foreign('interval_group_id')
                 ->references('id')
-                ->on('interval_groups');
+                ->on('interval_groups')
+                ->onDelete('cascade');
          });
     }
 

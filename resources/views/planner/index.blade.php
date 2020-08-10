@@ -81,8 +81,12 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h3> {!! $workout->name !!}</h3>
                                     <div class="d-flex justify-content-end  ">
-                                        <a href="/planner/{{ $workout->id }}/delete"
-                                           class="btn btn-danger ml-1">Delete</a>
+
+                                        {!! Form::open(['route' => ['workout.destroy', $workout], 'method' => 'POST']) !!}
+                                            @method('DELETE')
+                                            <button class="btn btn-danger ml-1">Delete test</button>
+                                         {!! Form::close() !!}
+
                                         <button class="btn btn-primary details-dd-btn  ml-1">Details</button>
                                         <a href="/planner/{{$workout->id}}/copy-workout"
                                            class="btn btn-success ml-1">Copy {!! $workout->name !!}</a>

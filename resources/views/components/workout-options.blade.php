@@ -8,8 +8,14 @@
             Intervals</a>
     </div>
     <div>
-        <a href="/planner/{{ $workout->id }}/delete"
-           class="btn btn-danger ">Delete</a>
-        <a href="/planner/{{ $workout->id }}/show" class="btn btn-success ">Show</a>
+
+        {!! Form::open(['route' => ['workout.destroy', $workout], 'method' => 'POST']) !!}
+        @method('DELETE')
+        <button class="btn btn-danger ml-1">Delete</button>
+        {!! Form::close() !!}
+
+        <a href="{{ route('workout.show', ['workout' => $workout]) }}" class="btn btn-success ">Show</a>
+                {{-- <a href="/planner/{{ $workout->id }}/show" class="btn btn-success ">Show</a> --}}
+
     </div>
 </div>

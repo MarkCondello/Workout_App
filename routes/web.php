@@ -34,8 +34,31 @@ Route::group(
     }
 );
 
-
 Route::group(['middleware' => 'auth'], function () {
+
+    Route::group([
+        'namespace' => 'Workout',
+        'as' => 'workout.',
+    ], function () {
+
+        Route::get('/planner', 'WorkoutController@index')->name('planner');
+        Route::post('/planner/createWorkout', 'WorkoutController@create')->name('create');
+        Route::delete('workout/{workout}/delete', 'WorkoutController@destroy')->name('destroy');
+        Route::get('workout/{workout}', 'WorkoutController@show')->name('show');
+        Route::get('/workout/{workout}/start', 'WorkoutController@start')->name('start');
+        Route::post('/planner/{workoutId}/save', 'WorkoutController@save')->name('save');
+
+
+
+        Route::get('/planner/{workoutId}/copy-workout', 'WorkoutController@copyWorkout');
+        Route::post('/planner/{workoutId}/save-copied-workout',
+            ['as' => 'planner.save-copied-workout', 'uses' => 'WorkoutController@saveCopiedWorkout']);
+
+        Route::get('/planner/{workoutId}/edit-workout', 'WorkoutController@editWorkout');
+        Route::post('/planner/{workoutId}/update-workout',
+            ['as' => 'planner.update-workout', 'uses' => 'WorkoutController@updateWorkout']);
+    });
+
 
     Route::group([
         'namespace' => 'Weights',
@@ -82,28 +105,6 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
 
-    Route::group([
-        'namespace' => 'Workout',
-        'as' => 'workout.',
-    ], function () {
 
-        Route::get('/planner', 'WorkoutController@index')->name('planner');
-        Route::post('/planner/createWorkout', 'WorkoutController@createWorkout')->name('create');
-
-        Route::get('planner/{workoutId}/delete', 'WorkoutController@deleteWorkout');
-
-        Route::get('planner/{workoutId}/show', 'WorkoutController@showWorkout');
-        Route::get('/planner/{workoutId}/start-workout', 'WorkoutController@startWorkout');
-        Route::post('/planner/{workoutId}/save-workout-results',
-            ['as' => 'planner.save-workout-results', 'uses' => 'WorkoutController@saveResults']);
-
-        Route::get('/planner/{workoutId}/copy-workout', 'WorkoutController@copyWorkout');
-        Route::post('/planner/{workoutId}/save-copied-workout',
-            ['as' => 'planner.save-copied-workout', 'uses' => 'WorkoutController@saveCopiedWorkout']);
-
-        Route::get('/planner/{workoutId}/edit-workout', 'WorkoutController@editWorkout');
-        Route::post('/planner/{workoutId}/update-workout',
-            ['as' => 'planner.update-workout', 'uses' => 'WorkoutController@updateWorkout']);
-    });
 
 });

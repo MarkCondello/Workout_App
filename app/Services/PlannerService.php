@@ -9,7 +9,7 @@ use App\IntervalGroup;
 class PlannerService
 {
 
-    public static function getUserWorkoutExerciseData(
+    public static function getExerciseData(
         $workoutId,
         $grouped = true
      ) {
@@ -27,7 +27,7 @@ class PlannerService
         return $exercises;  
     }
 
-    public static function getUserWorkoutIntervals($workoutId)
+    public static function getIntervalsData($workoutId)
     {
         $intervalGroups = User_Workout::find($workoutId)->interval_groups->toArray();
         foreach ($intervalGroups as $key => $group):
@@ -51,10 +51,19 @@ class PlannerService
     public static function sortWorkouts($collection)
     {
         return $collection->sortByDesc(function ($workout)  {
-            $workout->exercisesGrouped = PlannerService::getUserWorkoutExerciseData($workout->id);
-            $workout->intervalsGrouped = PlannerService::getUserWorkoutIntervals($workout->id);
+            $workout->exercisesGrouped = PlannerService::getExerciseData($workout->id);
+            $workout->intervalsGrouped = PlannerService::getIntervalsData($workout->id);
             return $workout->created_at;
         });
+    }
+
+    public static function showStartWorkoutData($workout)
+    {
+        return [
+            'exercisesGrouped' => PlannerService::getExerciseData($workout->id),
+            'intervalsGrouped' => PlannerService::getIntervalsData($workout->id, true),
+            'workout' => $workout,
+        ];
     }
 
 }

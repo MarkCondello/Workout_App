@@ -44,7 +44,7 @@
                     </div>
                     <div class="card-footer">id: {!!  $intervalGroup->id !!} | sets: {!!  $intervalGroup->sets !!}
                         | {!!  $intervalGroup->time !!}
-                        <a href="{{ route('planner') }}" class="btn btn-primary">
+                        <a href="{{ route('workout.planner') }}" class="btn btn-primary">
                             Back to {!!  $workoutName[0]->name  !!}</a>
 
                         {!! Form::open(['route' => ['interval.delete', $intervalGroup->id], 'method' => 'POST']) !!}
