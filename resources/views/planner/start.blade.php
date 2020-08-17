@@ -17,7 +17,7 @@
                     <div class="card-header d-flex justify-content-between">
                         <h2> {{$workout->name}}</h2>
                     </div>
-                    {!! Form::open(['route' => ['workout.save', $workout->id], 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['workout.save', $workout], 'method' => 'POST']) !!}
                     <div class="card-body">
                         @if($exercisesGrouped || $intervalsGrouped)
                             @if($intervalsGrouped)
@@ -95,9 +95,8 @@
                                                         @case('cardio')
                                                         {{--  ToDo: Need a way to allow user to have an option if they completed it or not--}}
                                                         @php $timeArr = explode(":", $exercise['time']);
-                                                $timeInSeconds = $timeArr[1] * 60 + $timeArr[2];
-                                                         @endphp
-
+                                                            $timeInSeconds = $timeArr[1] * 60 + $timeArr[2];
+                                                        @endphp
                                                         <div class="d-flex justify-content-between">
                                                             <div class="countdown" data-time="{{$timeInSeconds}}">
                                                                 <svg class="base-timer__svg" viewBox="0 0 100 100">
@@ -143,7 +142,7 @@
                                     {!! Form::close() !!}
                     </div>
                     <div class="d-flex justify-content-between">
-                        <a href="/planner/{{$workout->id}}/show" class="btn btn-primary">Back to workout</a>
+                    <a href="{{ route('workout.show', $workout) }}" class="btn btn-primary">Back to workout</a>
                     </div>
                 </div>
             </div>

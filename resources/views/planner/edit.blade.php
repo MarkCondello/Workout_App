@@ -5,9 +5,9 @@
             <div class="col-md-8">
                 <div class="card mb-5">
                     <div class="card-header d-flex justify-content-between">
-                        <h2>Edit {{$workoutName[0]->name}}</h2>
+                        <h2>Edit {{$workout->name}}</h2>
                     </div>
-                    {!! Form::open(['route' => ['planner.update-workout', $workoutId], 'action' => 'PlannerController@updateWorkkout', 'method' => 'POST']) !!}
+                    {!! Form::open(['route' => ['workout.update', $workout], 'method' => 'POST']) !!}
                     <div class="card-body">
                         @foreach($exercises as $key=>$exercise)
                             @php $exerciseType = $exercise->type; @endphp
@@ -37,12 +37,13 @@
                                 <h3>{{$exercise->name}} | {{$exercise->time}}</h3>
                                 <div class="d-flex justify-content-between">
                                     @php $timeArr = explode(":", $exercise->time); @endphp
+                                    {{-- @dump($timeArr[1]) --}}
                                     {{Form::hidden('exercise_workout_id[' .  $key . ']', $exercise->id)}}
-                                    {{Form::hidden('exercise_type[' .  $key . ']', $exercise->type)}}
+                                    {{Form::hidden('exercise_type[' . $key . ']', $exercise->type)}}
                                     <div>
                                         <div>
                                             {{Form::label('mins[' . $key . ']', 'Mins target:' . $timeArr[1]) }}
-                                            {{Form::number('mins[' . $key . ']', $timeArr[1], $exercise->reps, ['min' => 1])}}
+                                            {{Form::number('mins[' . $key . ']', $timeArr[1], ['min' => 1])}}
                                         </div>
                                         <div>
                                             {{Form::label('seconds[' . $key . ']', 'Seconds target' . $timeArr[2])}}
@@ -67,7 +68,7 @@
                     {!! Form::close() !!}
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a href="/planner/{{$workoutId}}/show" class="btn btn-primary">Back to {{$workoutName[0]->name}}</a>
+                <a href="{{ route('workout.show', $workout)}}" class="btn btn-primary">Back to {{$workout->name}}</a>
                 </div>
             </div>
         </div>

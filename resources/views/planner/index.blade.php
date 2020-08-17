@@ -43,22 +43,20 @@
                                         <div class="btn btn-primary details-dd-btn">Details</div>
                                     </div>
                                     <div class="details-panel">
-                                            @include('components/workout-options', ['workout' => $workout])
-
-                                            @if($workout->exercisesGrouped)
-                                                <div class="card-body border border-secondary mt-4 mb-4">
-                                                    <h4>Weights and Cardio</h4>
-                                                    <hr>
-                                                    @include('components/exercise-groups', ['exercisesGrouped' => $workout->exercisesGrouped])
-                                                </div>
-                                            @endif
-
-                                            @if($workout->intervalsGrouped)
-                                                <div class="card-body border border-secondary mb-4">
-                                                    <h4>Intervals</h4>
-                                                    @include('components/intervals-grouped', [ 'intervalsGrouped'=> $workout->intervalsGrouped])
-                                                </div>
-                                            @endif
+                                        @include('components/workout-options', ['workout' => $workout])
+                                        @if($workout->exercisesGrouped)
+                                            <div class="card-body border border-secondary mt-4 mb-4">
+                                                <h4>Weights and Cardio</h4>
+                                                <hr>
+                                                @include('components/exercise-groups', ['exercisesGrouped' => $workout->exercisesGrouped])
+                                            </div>
+                                        @endif
+                                        @if($workout->intervalsGrouped)
+                                            <div class="card-body border border-secondary mb-4">
+                                                <h4>Intervals</h4>
+                                                @include('components/intervals-grouped', [ 'intervalsGrouped'=> $workout->intervalsGrouped])
+                                            </div>
+                                        @endif
                                      </div>
                                 </div>
                             @else
@@ -81,14 +79,12 @@
                                 <div class="card-header d-flex justify-content-between">
                                     <h3> {!! $workout->name !!}</h3>
                                     <div class="d-flex justify-content-end  ">
-
-                                        {!! Form::open(['route' => ['workout.destroy', $workout], 'method' => 'POST']) !!}
+                                        {!! Form::open(['route' => ['workout.destroy', $workout] ]) !!}
                                             @method('DELETE')
                                             <button class="btn btn-danger ml-1">Delete test</button>
                                          {!! Form::close() !!}
-
                                         <button class="btn btn-primary details-dd-btn  ml-1">Details</button>
-                                        <a href="/planner/{{$workout->id}}/copy-workout"
+                                        <a href="{{ route('workout.copy', $workout) }}"
                                            class="btn btn-success ml-1">Copy {!! $workout->name !!}</a>
                                     </div>
                                 </div>
@@ -96,7 +92,6 @@
                                     @if($workout->exercisesGrouped)
                                         <div id="workout-{{$workout->id}}-exercise-details"
                                              class="card-body border border-secondary mt-2">
-
                                             @foreach($workout->exercisesGrouped as $exerciseGroup)
                                                 <ul style="padding:0;">
                                                     <li class="d-flex">
@@ -123,15 +118,12 @@
                                         <div id="workout-{{$workout->id}}-interval-details"
                                              class="card-body border border-secondary mt-2">
                                             @foreach($workout->intervalsGrouped as $key=>$intervalGroup)
-                                                {{--                                                @dump($intervalGroup)--}}
-                                                <ul style="padding:0;">
+                                                 <ul style="padding:0;">
                                                     <li class="d-flex">
-                                                        <h5>Interval Targets: {{ $intervalGroup['time'] }}
-                                                            | {{ $intervalGroup['sets'] }} sets</h5>
+                                                        <h5>Interval Targets: {{ $intervalGroup['time'] }} | {{ $intervalGroup['sets'] }} sets</h5>
                                                     </li>
                                                     <li class="d-flex">
-                                                        Results: {{ $intervalGroup['interval_results']['sets_completed'] }}
-                                                        sets
+                                                        Results: {{ $intervalGroup['interval_results']['sets_completed'] }} sets
                                                     </li>
                                                 </ul>
                                             @endforeach

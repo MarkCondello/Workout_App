@@ -7,11 +7,8 @@
                     <div class="card-header d-flex justify-content-between">
                         <h2> {{$workout->name}}</h2>
                         {{--  ToDo: Add edit options for workout--}}
-{{--                        <a href="/planner/{{$workoutId}}/edit-workout" class="btn btn-warning disabled">Edit workout</a>--}}
-                        <a href="{{ route('workout.start', ['workout' => $workout ]) }}" class="btn btn-success">Start workout</a>
-
-                                                {{-- <a href="/planner/{{$workoutId}}/start-workout" class="btn btn-success">Start workout</a> --}}
-
+                        <a href="{{ route('workout.edit', $workout) }}" class="btn btn-warning ">Edit workout</a> 
+                        <a href="{{ route('workout.start', $workout) }}" class="btn btn-success">Start workout</a>
                     </div>
                     <div class="card-body">
                         @if (session('status'))
@@ -41,8 +38,14 @@
                     </div>
                 </div>
                 <div class="d-flex justify-content-between">
-                    <a href="/planner" class="btn btn-primary">Back to dashboard</a>
-                    <a href="/planner/{{$workout->id}}/delete" class="btn btn-danger">Delete workout</a>
+                    <a href="{{ route('workout.planner') }}" class="btn btn-primary">Back to dashboard</a>
+
+                    {!! Form::open(['route' => ['workout.destroy', $workout] ]) !!}
+                        @method('DELETE')
+                        <button class="btn btn-danger ml-1">Delete workout </button>
+                    {!! Form::close() !!}
+
+                    {{-- <a href="{{ route('workout.destroy', $workout) }}" class="btn btn-danger">Delete workout</a> --}}
                 </div>
             </div>
         </div>

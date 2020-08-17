@@ -14,6 +14,7 @@ use App\IntervalGroup;
 use App\Services\PlannerService;
 use DB;
 use App\Http\Requests\CreateWorkoutRequest;
+use App\Http\Requests\Site\CopyWorkoutRequest;
 
 //ToDo: Controller should just navigate trafic to views, db logic and processing should be added to model and service layers respectivley
 class WorkoutController extends Controller
@@ -45,8 +46,7 @@ class WorkoutController extends Controller
         ));
     }
 
-    public
-    function create( CreateWorkoutRequest $request )
+    public function create(CreateWorkoutRequest $request )
     {
         User_Workout::create([
             'name' => request()->get('name'),
@@ -57,63 +57,40 @@ class WorkoutController extends Controller
         return redirect('planner');
     }
 
-    public
-    function destroy(User_Workout $workout) {
-        // Could not run the following : Cannot delete or update a parent row
-        // $workout->interval_groups()->delete();
-        // $workout->delete();
-        User_Workout::first()->where('id', '=', $workout->id)->delete();
+    public function destroy(User_Workout $workout) {      
+        $workout->delete();
         session()->flash('flashWarning', 'Workout was deleted.');
-        return redirect('/planner');
+        return redirect('planner');
     }
 
-    public
-    function show(User_Workout $workout) 
+    public function show(User_Workout $workout) 
     {
         return view('planner.show')
         ->with( PlannerService::showStartWorkoutData($workout) );
     }
     
- 
-    public
-    function start(User_Workout $workout) {
+    public function start(User_Workout $workout) {
         return view('planner.start')
         ->with( PlannerService::showStartWorkoutData($workout) );
     }
 
-    public
-    function editWorkout(
-        $workoutId
-    ) {
-
-        //ToDo: use getWOrkout name method
-        $workoutName = User_Workout::select('name')
-            ->where([
-                ['user_id', '=', auth()->user()->id],
-                ['id', '=', $workoutId]
-            ])
-            ->get();
-
-        $exercises = User_Workout::find($workoutId)->exercise_workouts;
-        $data = [];
+    public function edit(User_Workout $workout) 
+    {
+        $exercises = [];
         //add the name and type for each exercise
-        foreach ($exercises as $exercise):
+        foreach ($workout->exercise_workouts as $exercise):
             $exercise['name'] = Exercise::find($exercise->exercise_id)->name;
             $exercise['type'] = Exercise::find($exercise->exercise_id)->exerciseType->name;
-            $data[] = $exercise;
+            $exercises[] = $exercise;
         endforeach;
 
-        return view('planner.edit')->with([
-            'exercises' => $data,
-            'workoutName' => $workoutName,
-            'workoutId' => $workoutId
-        ]);
+        return view('planner.edit')
+            ->with(compact('exercises', 'workout'));
     }
 
-    public
-    function updateWorkout(
-        $workoutId
-    ) {
+    //ToDo: add the update back in, needs intervals added
+    public function update(User_Workout $workout) 
+    {
         $exercise_workout_id_items = request()->get('exercise_workout_id');
         $exercise_type = request()->get('exercise_type');
         $exercise_reps = request()->get('reps');
@@ -152,10 +129,10 @@ class WorkoutController extends Controller
             }
         endforeach;
         session()->flash('flashNotice', 'Workout details are updated.');
-        return $this->showWorkout($workoutId);
+        return $this->show($workout);
     }
 
-    public function save ($workoutId) 
+    public function save(User_Workout $workout) 
     {
         $intervalSets = request('interval_sets');
         if (!is_null($intervalSets)):
@@ -198,42 +175,31 @@ class WorkoutController extends Controller
             endforeach;
         endif;
 
-        DB::table('user_workouts')
-            ->where('id', '=', $workoutId)
-            ->update(['has_results' => true]);
-
-        session()->flash('flashNotice', 'Workout results saved successfully.');
-        return redirect('/planner');
+        $workout->has_results = true;
+        $workout->save();
+ 
+        session()->flash('flashNotice', "Workout {$workout->name} results saved successfully.");
+        return redirect('planner');
     }
 
-    public
-    function copyWorkout(
-        $workoutId
-    ) {
-        $workoutName = $this->getWorkoutName($workoutId);
-
+    public function copy(User_Workout $workout) 
+    {
         return view('planner.copy')
-            ->with([
-                'workoutId' => $workoutId,
-                'workoutName' => $workoutName
-            ]);
+            ->with(compact('workout'));
     }
 
-    public
-    function saveCopiedWorkout(
-        $workoutId
-    ) {
-        request()->validate([
-            'workoutName' => 'required|unique:user_workouts,name'
-        ]);
-
+    public function saveCopy(
+        CopyWorkoutRequest $request, 
+        User_Workout $workoutCopy) 
+        {
+ 
         $workout = User_Workout::create([
-             'name' => request('workoutName'),
+            'name' => request('workoutName'),
             'user_id' => auth()->user()->id
         ]);
 
-        $copiedWorkoutExercises = User_Workout::find($workoutId)->exercise_workouts;
-        $copiedIntervalGroups = User_Workout::find($workoutId)->interval_groups;
+        $copiedWorkoutExercises =  $workoutCopy->exercise_workouts;
+        $copiedIntervalGroups = $workoutCopy->interval_groups;
 
         //get intervalGroups and save each items data to a new entity
         $copiedIntervalExercises = [];
@@ -245,7 +211,6 @@ class WorkoutController extends Controller
             $intervalGroup->time = $copiedIntervalGroup->time;
             $intervalGroup->sets = $copiedIntervalGroup->sets;
             $intervalGroup->save();
-
 
             $copiedIntervalExercises = IntervalGroup::find($groupId)->exerciseWorkouts;
             //get the exercises in the Interval Groups and save those against the IntervalGroup Id ->exerciseWorkouts;
@@ -278,19 +243,6 @@ class WorkoutController extends Controller
         endforeach;
 
         session()->flash('flashNotice', 'Workout' . $workout->name . 'has been created.');
-        return $this->showWorkout($workout->id);
-    }
-
-    public
-    function getWorkoutName(
-        $workoutId
-    ) {
-        $workoutName = User_Workout::select('name')
-            ->where([
-                ['id', '=', $workoutId],
-                ['user_id', '=', auth()->user()->id]
-            ])
-            ->get();
-        return $workoutName;
+        return $this->show($workout);
     }
 }
